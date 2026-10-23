@@ -17,6 +17,7 @@
 src/
 ├── assets/work/              fotos del portafolio (procesadas por astro:assets)
 ├── assets/video/             pósters de los clips del footer (los MP4 viven en public/video/)
+├── assets/og/                portada.jpg: la imagen para compartir (la genera scripts/og-image.mjs)
 ├── components/
 │   ├── layout/               Loader (pantalla de carga), Header, Menu, SectionTicker, Footer
 │   ├── sections/             Hero, Essence, Process, Designs, Available, Services, Appointment, NotFound
@@ -35,6 +36,7 @@ src/
 │   ├── motion/               gsap, smooth, reveal, hero, pointerDepth, footer, films, loader
 │   └── webgl/                priceFlyer, pushPin, flyerTexture, satin (WebGL puro), loaderScene, scissors, paperFlaps, shaders/*.glsl
 └── styles/global.css         tokens, reset, utilidades, estados iniciales de animación
+scripts/og-image.mjs          genera la imagen para compartir con Chrome sin ventana (npm run og)
 ```
 
 ## Convenciones

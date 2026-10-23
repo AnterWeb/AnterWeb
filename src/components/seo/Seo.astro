@@ -6,6 +6,7 @@ import { site } from '../../data/site';
 import { buildJsonLd, defaultDescription, defaultTitle } from '../../data/seo';
 import { byId } from '../../data/work';
 import { collection } from '../../data/collection';
+import ogCover from '../../assets/og/portada.jpg';
 
 interface Props {
   title?: string;
@@ -19,9 +20,10 @@ const { title = defaultTitle, description = defaultDescription, noindex = false 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, siteUrl).href;
 
-// Imagen para compartir 1200×630, recortada en build desde una pieza del portafolio.
-const ogSource = byId('novia-salon');
-const og = await getImage({ src: ogSource.image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+// Imagen para compartir 1200×630: la portada de revista que arma scripts/og-image.mjs (npm run og).
+const ogAlt =
+  'Portada de Anter House: el wordmark ANTER sobre manos que drapean satín rosa, la colección Otoño/Invierno 2026 y la diseñadora bocetando en el taller';
+const og = await getImage({ src: ogCover, width: 1200, height: 630, format: 'jpg', quality: 90 });
 const ogImage = new URL(og.src, siteUrl).href;
 
 // Fotos de la colección para los productos del JSON-LD (portada de cada opción)
@@ -49,7 +51,7 @@ const jsonLd = noindex ? null : buildJsonLd(siteUrl, ogImage, (id) => productPho
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={ogSource.alt} />
+<meta property="og:image:alt" content={ogAlt} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />

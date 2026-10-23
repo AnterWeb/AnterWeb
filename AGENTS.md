@@ -19,6 +19,7 @@ astro dev stop | status | logs       # administrar el servidor en segundo plano
 npm run build                        # build de producción → dist/
 npm run preview                      # preview del build
 npm run check                        # diagnóstico de tipos (Astro + TS)
+npm run og                           # regenera la imagen para compartir (src/assets/og/portada.jpg)
 SITE_URL=https://dominio.mx npm run build   # build con el dominio real
 ```
 

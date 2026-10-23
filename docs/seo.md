@@ -15,8 +15,16 @@ Hasta el 2026-10-23 el valor por defecto era `anter-house.vercel.app`, que no ex
 | Title | `Vestidos a la medida y de novia en Monterrey \| Anter House`: 50–60 caracteres, keyword primero, sin guiones largos |
 | Description | 150–160 caracteres con keyword, la colección y CTA (`data/seo.ts`) |
 | Canonical | URL absoluta autorreferente (se omite si `noindex`) |
-| Open Graph / Twitter | `website`, `es_MX` e imagen 1200×630 recortada en build de `novia-salon` |
+| Open Graph / Twitter | `website`, `es_MX` y la portada `src/assets/og/portada.jpg` (1200×630, ver abajo) |
 | H1 | Oculto visualmente detrás del wordmark: "Anter House: vestidos a la medida y de novia en Monterrey" |
+
+## Imagen para compartir (`npm run og`)
+
+La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una portada de revista hecha con el sitio: ANTER a todo lo ancho como cabecera, el satín drapeado (`proceso-manos`) subiendo detrás de sus letras, "HOUSE" y "bespoke fashion" a los lados, la colección como titular en Italiana y la diseñadora en blanco y negro con "Hecho a tu medida, puntada a puntada." en vertical.
+
+- `scripts/og-image.mjs` la dibuja como HTML con las fuentes de Fontsource, los tokens de `global.css`, el wordmark de `data/wordmark.ts` y la temporada de `data/collection.ts`; la captura con Chrome sin ventana a 2x y la guarda reducida en `src/assets/og/portada.jpg`.
+- Al cambiar de temporada o de fotos: `npm run og` (en la Mac; en otro sistema, `CHROME=ruta npm run og`) y commit de la imagen.
+- WhatsApp a veces recorta la vista previa al centro en cuadrado: ahí quedan la foto principal y el centro de la cabecera.
 
 ## JSON-LD (`data/seo.ts → buildJsonLd`)
 

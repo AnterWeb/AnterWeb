@@ -5,6 +5,7 @@
 - **Dominio:** canonical, `og:url`, `og:image`, sitemap, robots y JSON-LD apuntaban a `anter-house.vercel.app`, que da 404 (al compartir el enlace no salía la imagen). Ahora salen de `VERCEL_PROJECT_PRODUCTION_URL`: hoy `alter-psi-two.vercel.app` y, cuando se conecte el dominio de la clienta, ese, sin tocar código.
 - **JSON-LD:** la colección entra como `ItemList` de `Product` con precio, tallas y disponibilidad (`InStock`/`SoldOut`). `productName` da el nombre de venta de cada prenda (también en `llms.txt`).
 - **Description:** menciona la colección Otoño/Invierno 2026.
+- **Imagen para compartir:** en lugar del recorte horizontal de la novia (le cortaba la cabeza y no llevaba marca), una portada de revista hecha con las fotos, colores y tipografías del sitio (`scripts/og-image.mjs`, `npm run og`).
 
 ## 2026-10-23: v0.9 (tercera ronda de la clienta y pantalla de carga)
 
