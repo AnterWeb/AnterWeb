@@ -32,7 +32,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 | UI | Componentes `.astro`; React 19 solo en islas con estado real |
 | Estilos | CSS a mano, scoped por componente, sobre los tokens de `src/styles/global.css` |
 | Movimiento | GSAP 3: ScrollSmoother, ScrollTrigger y `useGSAP` |
-| 3D | Three.js (r186) para el flyer de precios, cargado de forma diferida |
+| 3D | Three.js (r186) para la pantalla de carga (tijeras y solapas de papel) y el flyer de precios, cargado con `import()` |
 | Tipografía | Italiana (display) + Jost (texto), self-hosted vía Fontsource |
 | Imágenes | `astro:assets` (`<Image>` / `getImage`) desde `src/assets/` |
 | Idioma | Solo español (`es-MX`) |
@@ -42,7 +42,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 ### Código
 
 - **Código artesanal y estructurado.** Nada revuelto: cada pieza vive en su carpeta y tiene una sola responsabilidad. Ver [`docs/architecture/structure.md`](./docs/architecture/structure.md).
-  - `components/layout/`: Header, Menu, SectionTicker, Footer.
+  - `components/layout/`: Loader, Header, Menu, SectionTicker, Footer.
   - `components/sections/`: una sección por archivo.
   - `components/blocks/`: piezas compuestas de una sección.
   - `components/ui/`: primitivas (`icons/` incluido).
@@ -73,7 +73,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 | Logo, paleta, tipografía, estilo editorial y tono | [`docs/brand/identity.md`](./docs/brand/identity.md) |
 | Stack, carpetas y convenciones de código | [`docs/architecture/structure.md`](./docs/architecture/structure.md) |
 | GSAP: ScrollSmoother, reveals, galería, ticker | [`docs/experience/motion.md`](./docs/experience/motion.md) |
-| Three.js: flyer de papel con chinche | [`docs/experience/webgl.md`](./docs/experience/webgl.md) |
+| Three.js: pantalla de carga (tijeras y solapas) y flyer con chinche | [`docs/experience/webgl.md`](./docs/experience/webgl.md) |
 | Navegación: header flotante, menú y ticker | [`docs/experience/navigation.md`](./docs/experience/navigation.md) |
 | Formulario de contacto tipo Typeform → WhatsApp | [`docs/experience/contact-form.md`](./docs/experience/contact-form.md) |
 | Landing: secciones, orden y copy | [`docs/pages/home.md`](./docs/pages/home.md) |
@@ -93,6 +93,8 @@ Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) está
 | Wordmark ANTER (trazos del logo original) | `src/data/wordmark.ts` → `ui/Wordmark.astro` |
 | Contacto y navegación | `src/data/site.ts` |
 | Fotos, piezas (vestidos) y categorías | `src/data/work.ts` |
+| Colección a la venta: colores, precios, tallas y sold out | `src/data/collection.ts` |
+| Clips del footer | `src/data/films.ts` (MP4 en `public/video/`) |
 | Pasos de la sección Proceso | `src/data/process.ts` |
 | Servicios y precios | `src/data/services.ts` |
 | Preguntas del formulario de contacto | `src/data/contactForm.ts` |

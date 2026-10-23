@@ -2,6 +2,7 @@
 // Lee los mismos datos que la lista HTML (src/data/services.ts): una sola fuente de verdad.
 import { expressSurcharge, priceList, priceListTitle, priceNote } from '../../data/services';
 import { WORDMARK_HEIGHT, WORDMARK_WIDTH, wordmarkGlyphs } from '../../data/wordmark';
+import { mxn } from '../../data/format';
 
 export const FLYER_WIDTH = 1000;
 export const FLYER_HEIGHT = 1300;
@@ -20,7 +21,6 @@ const COLORS = {
 
 const SANS = '"Jost Variable", Jost, sans-serif';
 
-const mxn = (value: number) => `$${value.toLocaleString('es-MX')}`;
 
 /** Texto con tracking manual (letterSpacing de canvas no es universal). */
 function drawSpaced(

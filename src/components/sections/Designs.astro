@@ -4,9 +4,9 @@
 // Las imágenes se optimizan en el servidor y se pasan a la isla React (lightbox incluido).
 import SectionHeading from '../ui/SectionHeading.astro';
 import DesignGallery from '../islands/gallery/DesignGallery';
-import { galleryGroups } from '../islands/gallery/groups';
+import { designGroups } from '../islands/gallery/groups';
 
-const groups = await galleryGroups('disenos');
+const groups = await designGroups();
 ---
 
 <section class="designs" id="disenos" aria-labelledby="disenos-title" data-section="02" data-section-label="Diseños">

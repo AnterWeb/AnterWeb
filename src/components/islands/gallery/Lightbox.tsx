@@ -40,7 +40,10 @@ export default function Lightbox({ slides, index, origin, cardFor, onClose, onNa
     if (closing.current) return;
     closing.current = true;
     if (!motionOk()) return onClose();
-    closeTo(cardFor(slide.item.id), parts(), slide.photoIndex !== 0, onClose);
+    // Si la tarjeta muestra otra foto (su portada o la de otro color), la que regresa se funde al llegar.
+    const card = cardFor(slide.item.id);
+    const shown = card?.querySelector('img[data-active="true"]')?.getAttribute('src');
+    closeTo(card, parts(), shown !== slide.photo.src, onClose);
   };
 
   // Al abrir: foco en "Cerrar" y bloqueo de scroll. Al cerrar: devuelve el foco.
@@ -80,6 +83,9 @@ export default function Lightbox({ slides, index, origin, cardFor, onClose, onNa
   if (!slide) return null;
   const { item, photo, itemIndex, photoIndex } = slide;
   const framing = photo.focus ? { objectPosition: photo.focus } : undefined;
+  // Prenda a la venta: el color de esta foto y su precio (si la foto no la comparten dos opciones)
+  const owners = item.options?.filter((option) => option.photos.includes(photoIndex));
+  const option = owners?.length === 1 ? owners[0] : null;
 
   // Portal a <body>: el contenido con ScrollSmoother está transformado y rompería position: fixed.
   return createPortal(
@@ -123,7 +129,12 @@ export default function Lightbox({ slides, index, origin, cardFor, onClose, onNa
               Foto {photoIndex + 1} de {item.photos.length}
             </span>
           )}
-          <span className="gallery__category">{item.categoryLabel}</span>
+          {option && (
+            <span className="gallery__category">
+              {option.label} · {option.price}
+            </span>
+          )}
+          <span className="gallery__category">{item.groupLabel}</span>
         </figcaption>
       </figure>
 

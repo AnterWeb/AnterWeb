@@ -24,12 +24,12 @@ Recursos de revista de moda disponibles (primero usado en Esencia):
 - **Capital** (`<WordReveal dropCap />`): primera letra en Italiana terracota que ocupa varias líneas.
 - **Cuerpo a dos columnas** con filete de 1 px y **entrada en versalitas** (primeras palabras en mayúsculas espaciadas).
 - **Cita destacada**: Italiana con filete vertical terracota a la izquierda y firma en versalitas. No uses la comilla de Italiana, que se ve rara.
-- **Pies de foto** (`ui/FigCaption.astro`): `Fig. n` + título en letra pequeña, vertical junto al borde (`vertical`) o debajo de la foto. La numeración es correlativa en toda la página.
-- **Composición sin huecos**: si una pantalla queda con esquinas vacías, se llenan con piezas sueltas (foto chica con pie, nota de columna), como en el hero.
+- **Composición sin huecos**: si una pantalla queda con esquinas vacías, se llenan con piezas sueltas (foto chica, nota de columna, texto vertical en terracota), como en el hero.
 
 No usar:
 
 - Etiquetas tipo `03 —— S E R V I C I O S` (número + raya + mayúsculas espaciadas). Se sienten corporativas.
+- Pies de foto `Fig. n`: la clienta los quitó de Esencia (2026-10-23).
 - Filas de valores numerados (`01 DISEÑO PROPIO  02 …`). Se ven "hechas por IA"; usa una cita destacada o texto corrido.
 - Títulos enormes fuera del wordmark.
 - Secciones con fondos alternados.

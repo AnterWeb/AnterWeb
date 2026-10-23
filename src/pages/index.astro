@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Loader from '../components/layout/Loader.astro';
 import Header from '../components/layout/Header.astro';
 import Menu from '../components/layout/Menu.astro';
 import SectionTicker from '../components/layout/SectionTicker.astro';
@@ -15,6 +16,7 @@ import Appointment from '../components/sections/Appointment.astro';
 
 <Layout>
   <Fragment slot="fixed">
+    <Loader />
     <Header />
     <Menu />
     <SectionTicker />

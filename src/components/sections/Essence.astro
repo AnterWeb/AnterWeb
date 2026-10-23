@@ -1,21 +1,20 @@
 ---
 // 01 — Nuestra esencia. Maquetada como página de revista de moda:
-// capital, cuerpo a dos columnas con entrada en versalitas, cita destacada y pies de foto.
+// capital, cuerpo a dos columnas con entrada en versalitas y cita destacada.
 // Copy en borrador: validar con la clienta (docs/pages/home.md).
 import { Image } from 'astro:assets';
 import SectionHeading from '../ui/SectionHeading.astro';
 import WordReveal from '../ui/WordReveal.astro';
-import FigCaption from '../ui/FigCaption.astro';
 import { byId } from '../../data/work';
 
 const manifesto =
   'Cada pieza empieza con una conversación. Escuchamos qué quieres sentir el día que la uses y lo traducimos en tela, corte y detalle, construido alrededor de ti.';
 
-// Collage: la diseñadora en su taller (photoshoot), cada foto con su pie editorial ("Fig. n · título").
+// Collage: la diseñadora en su taller (photoshoot). Sin pies de foto (la clienta los quitó, 2026-10-23).
 const figures = [
-  { photo: byId('proceso-retrato'), variant: 'portrait', parallax: '-0.06', widths: [500, 800, 1100], sizes: '(max-width: 860px) 60vw, 24vw' },
-  { photo: byId('proceso-corte'), variant: 'detail', parallax: '-0.22', widths: [300, 600], sizes: '(max-width: 860px) 34vw, 12vw' },
-  { photo: byId('proceso-prueba-tela'), variant: 'mirror', parallax: '-0.14', widths: [300, 600], sizes: '(max-width: 860px) 30vw, 11vw' },
+  { photo: byId('proceso-retrato'), variant: 'portrait', parallax: '-0.06', widths: [500, 800, 1100], sizes: '(max-width: 860px) 54vw, 22vw' },
+  { photo: byId('proceso-corte'), variant: 'detail', parallax: '-0.22', widths: [400, 700, 1000], sizes: '(max-width: 860px) 40vw, 17vw' },
+  { photo: byId('proceso-prueba-tela'), variant: 'mirror', parallax: '-0.14', widths: [400, 700, 1000], sizes: '(max-width: 860px) 34vw, 16vw' },
 ];
 ---
 
@@ -40,7 +39,7 @@ const figures = [
     </div>
 
     <div class="essence__collage">
-      {figures.map(({ photo, variant, parallax, widths, sizes }, i) => (
+      {figures.map(({ photo, variant, parallax, widths, sizes }) => (
         <div class:list={['essence__item', `essence__item--${variant}`]} data-parallax={parallax}>
           <figure class="essence__photo" data-clip>
             <Image
@@ -51,7 +50,6 @@ const figures = [
               style={photo.focus ? `object-position: ${photo.focus}` : undefined}
             />
           </figure>
-          <FigCaption n={i + 1} title={photo.caption} vertical={variant === 'portrait'} />
         </div>
       ))}
       <p class="essence__vertical display" aria-hidden="true" data-reveal>Monterrey, N.L.</p>
@@ -123,7 +121,7 @@ const figures = [
   /* Collage: misma gramática que el hero (fotos sueltas a distintas escalas) */
   .essence__collage {
     position: relative;
-    height: clamp(26rem, 46vw, 40rem);
+    height: clamp(28rem, 50vw, 44rem);
   }
 
   .essence__item {
@@ -144,21 +142,21 @@ const figures = [
   }
 
   .essence__item--portrait {
-    left: 18%;
-    top: 4%;
-    width: 50%;
+    left: 15%;
+    top: 0;
+    width: 46%;
   }
 
   .essence__item--detail {
     left: 0;
     bottom: 0;
-    width: 26%;
+    width: 36%;
   }
 
   .essence__item--mirror {
     right: 0;
-    top: 30%;
-    width: 24%;
+    top: 34%;
+    width: 34%;
   }
 
   .essence__vertical {
@@ -177,6 +175,20 @@ const figures = [
 
     .essence__collage {
       height: 118vw;
+    }
+
+    .essence__item--portrait {
+      left: 10%;
+      width: 54%;
+    }
+
+    .essence__item--detail {
+      width: 40%;
+    }
+
+    .essence__item--mirror {
+      top: 40%;
+      width: 36%;
     }
 
     .essence__body {

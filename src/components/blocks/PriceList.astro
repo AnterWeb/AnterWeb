@@ -2,8 +2,7 @@
 // Hoja de precios: réplica del flyer de la clienta (título en services.ts).
 import Wordmark from '../ui/Wordmark.astro';
 import { expressSurcharge, priceList, priceListTitle, priceNote } from '../../data/services';
-
-const mxn = (value: number) => `$${value.toLocaleString('es-MX')}`;
+import { mxn } from '../../data/format';
 ---
 
 <aside class="prices" aria-labelledby="prices-title" data-reveal>

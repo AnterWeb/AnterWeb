@@ -1,23 +1,23 @@
 // Sección Proceso: los pasos del taller, cada uno con una foto del photoshoot (id de `photos` en work.ts).
-// Copy en borrador: validar con la clienta (docs/pages/home.md).
+// Diseño, Patrón y Prueba: textos de la clienta (2026-10-23). Costura sigue en borrador (docs/pages/home.md).
 
 export const processSteps = [
   {
     n: '01',
-    title: 'Boceto',
-    body: 'Dibujamos la pieza a partir de lo que imaginas: silueta, tela y detalles.',
+    title: 'Diseño',
+    body: 'Definimos la prenda que deseas, creando un diseño completamente personalizado.',
     photo: 'proceso-boceto',
   },
   {
     n: '02',
     title: 'Patrón',
-    body: 'Trazamos el patrón con tus medidas exactas antes de cortar la tela.',
+    body: 'Antes de cortar la tela, creamos el patrón con tus medidas exactas y una prueba en manta para un mejor ajuste.',
     photo: 'proceso-patron',
   },
   {
     n: '03',
     title: 'Prueba',
-    body: 'Ajustamos sobre maniquí y sobre ti, las veces que haga falta.',
+    body: 'Dependiendo del diseño, coordinamos citas de prueba en las que se perfeccionará cada detalle de tu prenda.',
     photo: 'proceso-prueba',
   },
   {

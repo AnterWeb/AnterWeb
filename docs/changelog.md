@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-23: v0.9 (tercera ronda de la clienta y pantalla de carga)
+
+- **Nuestra esencia:** sin los pies "Fig. n" (la clienta los quitó). Las dos fotos chicas del collage crecen (corte de 26 % a 36 % del collage, prueba de tela de 24 % a 34 %) y el collage es un poco más alto. Se eliminó `ui/FigCaption.astro` y el campo `caption` de las fotos, que ya nadie usaba.
+- **Proceso:** textos de la clienta para Diseño (antes Boceto), Patrón y Prueba. En Prueba se ajustó "Dependiendo el diseño" a "Dependiendo del diseño,". Costura no cambió.
+- **Piezas disponibles:**
+  - un solo grupo, "Colección Otoño/Invierno 2026", en lugar de Vestidos y Blusas y tops;
+  - intro de la clienta: "Otoño/Invierno 2026. Adquiere tus piezas favoritas de nuestra colección limitada." y el botón de WhatsApp debajo;
+  - cada tarjeta lleva muestras de color que cambian las fotos (con la ola de satín), el precio y las tallas; las tallas vendidas se tachan con "Sold out" (borde de puntada) y una opción agotada lleva sello sobre la foto;
+  - datos nuevos en `data/collection.ts` (precios y tallas de la clienta, sin cantidades); el top "negro" era café oscuro y su foto pasó a `disponible-top-cafe`;
+  - la blusa lila y el pantalón negro son dos opciones de la misma tarjeta (se venden por separado) que comparten foto: el pantalón encuadra abajo;
+  - el lightbox muestra el color y el precio de cada foto; `llms.txt` lista la colección con precios y tallas disponibles.
+- **Agenda tu cita:** "No dudes en contactarnos. Tu próxima cita está a tan solo un clic." en lugar de la explicación del formulario, y botón "Agenda por WhatsApp". El formulario sigue (decisión pendiente con la clienta).
+- **Footer:** dos clips del taller que mandó la clienta (el boceto que se colorea y el cuaderno que se hojea), con la gramática del hero: escalas distintas, el cuaderno en blanco y negro y "est. 2024" vertical en terracota. Se convirtieron a loops MP4 sin audio (`public/video/`); solo se reproducen en pantalla y con reduced motion queda el póster. `data-clip` ahora también acerca videos.
+- **Pantalla de carga** (`layout/Loader.astro`, `motion/loader.ts`, `webgl/loaderScene.ts`, `scissors.ts`, `paperFlaps.ts`): una hoja de papel de patrón con ANTER; unas tijeras de sastre en 3D (acero cepillado, mangos laqueados en tinta, sombra real) aterrizan, cortan la palabra en tijeretazos y se van; la hoja se enrolla desde el corte y entra el hero. Respaldos sin WebGL, sin JS y con reduced motion. Three.js ahora se pide al abrir la landing (el flyer lo reutiliza de la caché).
+- `data/format.ts` (`mxn`) reemplaza las tres copias del formato de precio.
+
 ## 2026-10-16: v0.8 (photoshoot profesional)
 
 - Llegó el photoshoot profesional del taller desde Pixieset: 85 fotos de la fotógrafa (camilatorrez.pixieset.com). En total se usan 10 nuevas, procesadas como siempre (enderezadas, 2400 px, sin metadatos).
@@ -144,6 +160,8 @@
 
 - Confirmar el dominio de producción y otros datos de la clienta (ver `docs/seo.md`).
 - Logo vectorial y nombre de la fuente original.
-- Validar la copy y los títulos de las piezas.
+- Validar la copy y los títulos de las piezas (incluidos los nombres de los modelos de la colección).
+- Decidir con la clienta si el formulario de Cita se queda, se recorta o se quita (hoy convive con el botón directo a WhatsApp).
+- Marcar en `data/collection.ts` las tallas que se vendan (por ejemplo, después del open house).
 - Si se agrega una FAQ: sumar `FAQPage` al schema.
 - Configurar el deploy en Vercel.

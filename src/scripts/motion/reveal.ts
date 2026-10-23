@@ -1,7 +1,7 @@
 // Animaciones de scroll declaradas por atributos (estados iniciales en global.css).
 //   data-reveal              → fade + subida al entrar en viewport
 //   data-reveal-delay="0.2"  → retraso opcional en segundos
-//   data-clip                → la imagen se destapa de abajo hacia arriba, atada al scroll
+//   data-clip                → la imagen (o el video) se destapa de abajo hacia arriba, atada al scroll
 //   data-parallax="-0.15"    → desplazamiento relativo (yPercent) mientras cruza el viewport
 //   data-words               → cada .word pasa de tenue a sólida conforme avanzas
 import { gsap, ScrollTrigger, MOTION_OK } from './gsap';
@@ -21,8 +21,8 @@ export function initReveals() {
     gsap.utils.toArray<HTMLElement>('[data-clip]').forEach((el) => {
       const scrub = { trigger: el, start: 'top 92%', end: 'top 45%', scrub: 0.6 };
       gsap.to(el, { clipPath: 'inset(0% 0 0 0)', ease: 'none', scrollTrigger: scrub });
-      const img = el.querySelector('img');
-      if (img) gsap.fromTo(img, { scale: 1.22 }, { scale: 1, ease: 'none', scrollTrigger: scrub });
+      const media = el.querySelector('img, video');
+      if (media) gsap.fromTo(media, { scale: 1.22 }, { scale: 1, ease: 'none', scrollTrigger: scrub });
     });
 
     gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {

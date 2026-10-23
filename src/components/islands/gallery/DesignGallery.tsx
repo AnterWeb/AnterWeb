@@ -1,5 +1,6 @@
-// Galería de diseños agrupada por categoría (boceto de la clienta: Novias, Fiesta).
+// Galería agrupada: Diseños (boceto de la clienta: Novias, Fiesta) y Piezas disponibles (la colección a la venta).
 // Cada grupo es una tira horizontal; al hacer clic la foto vuela al lightbox (Flip), que recorre todas las fotos en orden.
+// variant="shop": tarjetas que llenan la fila, con colores, precio y tallas (ver PieceOptions).
 import { useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,9 +15,10 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 interface Props {
   groups: GalleryGroup[];
+  variant?: 'shop';
 }
 
-export default function DesignGallery({ groups }: Props) {
+export default function DesignGallery({ groups, variant }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const origin = useRef<FlipOrigin | null>(null);
@@ -60,7 +62,7 @@ export default function DesignGallery({ groups }: Props) {
   );
 
   return (
-    <div ref={root} className="gallery">
+    <div ref={root} className={variant ? `gallery gallery--${variant}` : 'gallery'}>
       {groups.map((group) => (
         <GalleryRow key={group.id} group={group} onOpen={openAt} />
       ))}

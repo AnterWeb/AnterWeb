@@ -1,5 +1,3 @@
-import type { Category } from '../../../data/work';
-
 /** Foto serializable para la isla: ya optimizada en el servidor. */
 export interface GalleryPhoto {
   alt: string;
@@ -11,18 +9,34 @@ export interface GalleryPhoto {
   height: number;
 }
 
-/** Una pieza (un vestido) con todas sus fotos; la primera es la portada. */
+/** Una opción de una prenda a la venta (color o prenda del conjunto), ya lista para pintar. */
+export interface GalleryOption {
+  label: string;
+  swatch: string;
+  /** índices de `photos` de la pieza; el primero es la portada de la opción */
+  photos: number[];
+  focus?: string;
+  /** precio con formato ("$1,500") */
+  price: string;
+  sizes: { size: string; soldOut: boolean }[];
+  /** todas sus tallas se vendieron */
+  soldOut: boolean;
+}
+
+/** Una pieza (un vestido o una prenda a la venta) con todas sus fotos. */
 export interface GalleryItem {
   id: string;
   title: string;
-  category: Category;
-  categoryLabel: string;
+  /** nombre del grupo; lo muestra el lightbox */
+  groupLabel: string;
   photos: GalleryPhoto[];
+  /** solo las prendas a la venta: colores o prendas a elegir, con precio y tallas */
+  options?: GalleryOption[];
 }
 
-/** Un grupo de la galería (Novias, Fiesta…) con sus piezas en orden. */
+/** Un grupo de la galería (Novias, Fiesta, la colección…) con sus piezas en orden. */
 export interface GalleryGroup {
-  id: Category;
+  id: string;
   label: string;
   items: GalleryItem[];
 }

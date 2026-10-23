@@ -4,8 +4,14 @@ import type { APIRoute } from 'astro';
 import { site } from '../data/site';
 import { expressSurcharge, priceList, priceNote, services } from '../data/services';
 import { defaultDescription } from '../data/seo';
+import { collection, collectionTitle, isSoldOut, type CollectionOption } from '../data/collection';
+import { mxn } from '../data/format';
 
-const mxn = (value: number) => `$${value.toLocaleString('es-MX')} MXN`;
+const pesos = (value: number) => `${mxn(value)} MXN`;
+
+/** Tallas que quedan de una opción de la colección. */
+const available = (option: CollectionOption) =>
+  isSoldOut(option) ? 'agotado' : `tallas ${option.sizes.filter((size) => !option.soldOut?.includes(size)).join(', ')}`;
 
 export const GET: APIRoute = ({ site: siteUrl }) => {
   const lines = [
@@ -19,11 +25,17 @@ export const GET: APIRoute = ({ site: siteUrl }) => {
     '## Precios de confección y ajustes',
     ...priceList.flatMap((group) => [
       `### ${group.group}`,
-      ...group.items.map((item) => `- ${item.label}: ${mxn(item.price)}`),
+      ...group.items.map((item) => `- ${item.label}: ${pesos(item.price)}`),
     ]),
-    `- Arreglo express: +${mxn(expressSurcharge)}`,
+    `- Arreglo express: +${pesos(expressSurcharge)}`,
     '',
     `${priceNote}`,
+    '',
+    `## Piezas disponibles: ${collectionTitle}`,
+    'Prendas terminadas a la venta. Para pedir una, escribe por WhatsApp.',
+    ...collection.flatMap((piece) =>
+      piece.options.map((option) => `- ${piece.title}, ${option.label}: ${pesos(option.price)} (${available(option)})`),
+    ),
     '',
     '## Contacto',
     `- Ubicación: ${site.area}, ${site.city}`,

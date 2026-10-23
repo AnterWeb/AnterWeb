@@ -3,7 +3,9 @@
 //   data-drift   → parallax yPercent al hacer scroll (puede envolver foto + pie)
 //   data-letter  → letras del wordmark (span o path de SVG) suben con stagger
 //   data-intro   → textos que entran al final
+// En la landing, la entrada espera a que se abra la pantalla de carga (loader.ts).
 import { gsap, MOTION_OK } from './gsap';
+import { afterLoader } from './loader';
 
 export function initHero(hero: HTMLElement) {
   const mm = gsap.matchMedia();
@@ -15,7 +17,7 @@ export function initHero(hero: HTMLElement) {
     const intro = hero.querySelectorAll<HTMLElement>('[data-intro]');
     const wordmark = hero.querySelector<HTMLElement>('[data-wordmark]');
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
     tl.to(photos, { clipPath: 'inset(0% 0 0 0)', duration: 1.4, stagger: 0.12, ease: 'power4.inOut' })
       .fromTo(
         hero.querySelectorAll('[data-photo] img'),
@@ -31,6 +33,7 @@ export function initHero(hero: HTMLElement) {
         { opacity: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power2.out' },
         '-=0.8',
       );
+    afterLoader(() => tl.play());
 
     const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
 

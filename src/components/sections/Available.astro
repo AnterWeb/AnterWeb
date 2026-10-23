@@ -1,16 +1,16 @@
 ---
-// 03 — Piezas disponibles. Prendas terminadas a la venta, con la misma galería que Diseños
-// (una tarjeta por modelo; sus colores y vistas se hojean en la tarjeta). Datos en src/data/work.ts.
-// Copy en borrador: validar con la clienta (docs/pages/home.md).
+// 03 — Piezas disponibles. La colección a la venta con la misma galería que Diseños: una tarjeta por modelo,
+// con sus colores, precio y tallas (las vendidas dicen "Sold out"). Datos en src/data/collection.ts.
+// Texto de la intro: lo dio la clienta (2026-10-23).
 import SectionHeading from '../ui/SectionHeading.astro';
 import Button from '../ui/Button.astro';
 import WhatsAppIcon from '../ui/icons/WhatsAppIcon.astro';
 import DesignGallery from '../islands/gallery/DesignGallery';
-import { galleryGroups } from '../islands/gallery/groups';
+import { collectionGroup } from '../islands/gallery/groups';
 import { whatsappLink } from '../../data/site';
 
-const groups = await galleryGroups('disponibles');
-const inquiry = whatsappLink('Hola Anter House, me interesa una de las piezas disponibles.');
+const groups = [await collectionGroup()];
+const inquiry = whatsappLink('Hola Anter House, me interesa una pieza de la colección Otoño/Invierno 2026.');
 ---
 
 <section class="available" id="disponibles" aria-labelledby="disponibles-title" data-section="03" data-section-label="Piezas disponibles">
@@ -18,12 +18,12 @@ const inquiry = whatsappLink('Hola Anter House, me interesa una de las piezas di
     <div class="available__head">
       <SectionHeading label="Piezas disponibles" title="Listas para estrenar." id="disponibles-title" />
       <div class="available__aside" data-reveal>
-        <p>Prendas terminadas en el taller. Pregunta por tallas y colores.</p>
+        <p><span class="available__season">Otoño/Invierno 2026.</span> Adquiere tus piezas favoritas de nuestra colección limitada.</p>
         <Button href={inquiry} variant="outline" external><WhatsAppIcon size={15} /> Preguntar</Button>
       </div>
     </div>
     <div class="available__groups">
-      <DesignGallery client:visible groups={groups} />
+      <DesignGallery client:visible groups={groups} variant="shop" />
     </div>
   </div>
 </section>
@@ -51,6 +51,10 @@ const inquiry = whatsappLink('Hola Anter House, me interesa una de las piezas di
   .available__aside p {
     font-size: 0.9rem;
     color: var(--tinta-soft);
+  }
+
+  .available__season {
+    color: var(--tinta);
   }
 
   .available__groups {

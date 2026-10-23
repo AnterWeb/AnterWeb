@@ -1,7 +1,10 @@
 // Solo servidor: lo importan las secciones .astro para preparar los datos de la isla.
-// Arma los grupos de una sección (Diseños o Piezas disponibles) con las fotos ya optimizadas.
+// Arma los grupos de Diseños (portafolio) y el de Piezas disponibles (la colección a la venta)
+// con las fotos ya optimizadas.
 import { getImage } from 'astro:assets';
-import { byId, categories, pieces, type GallerySection, type Piece } from '../../../data/work';
+import { byId, categories, pieces } from '../../../data/work';
+import { collection, collectionTitle, isSoldOut } from '../../../data/collection';
+import { mxn } from '../../../data/format';
 import type { GalleryGroup, GalleryItem, GalleryPhoto } from './types';
 
 const toPhoto = async (id: string): Promise<GalleryPhoto> => {
@@ -19,23 +22,47 @@ const toPhoto = async (id: string): Promise<GalleryPhoto> => {
   };
 };
 
-const toItem = async (piece: Piece, categoryLabel: string): Promise<GalleryItem> => ({
-  id: piece.id,
-  title: piece.title,
-  category: piece.category,
-  categoryLabel,
-  photos: await Promise.all(piece.photos.map(toPhoto)),
-});
-
-export const galleryGroups = (section: GallerySection): Promise<GalleryGroup[]> =>
+/** Diseños: un grupo por categoría (Novias, Fiesta). */
+export const designGroups = (): Promise<GalleryGroup[]> =>
   Promise.all(
-    categories
-      .filter((category) => category.section === section)
-      .map(async (category) => ({
-        id: category.id,
-        label: category.label,
-        items: await Promise.all(
-          pieces.filter((piece) => piece.category === category.id).map((piece) => toItem(piece, category.label)),
-        ),
-      })),
+    categories.map(async (category) => ({
+      id: category.id,
+      label: category.label,
+      items: await Promise.all(
+        pieces
+          .filter((piece) => piece.category === category.id)
+          .map(async (piece) => ({
+            id: piece.id,
+            title: piece.title,
+            groupLabel: category.label,
+            photos: await Promise.all(piece.photos.map(toPhoto)),
+          })),
+      ),
+    })),
   );
+
+/** Piezas disponibles: la colección en un solo grupo. Si dos opciones comparten foto, se carga una vez. */
+export const collectionGroup = async (): Promise<GalleryGroup> => ({
+  id: 'coleccion',
+  label: collectionTitle,
+  items: await Promise.all(
+    collection.map(async (piece): Promise<GalleryItem> => {
+      const ids = [...new Set(piece.options.flatMap((option) => option.photos))];
+      return {
+        id: piece.id,
+        title: piece.title,
+        groupLabel: collectionTitle,
+        photos: await Promise.all(ids.map(toPhoto)),
+        options: piece.options.map((option) => ({
+          label: option.label,
+          swatch: option.swatch,
+          photos: option.photos.map((id) => ids.indexOf(id)),
+          focus: option.focus,
+          price: mxn(option.price),
+          sizes: option.sizes.map((size) => ({ size, soldOut: option.soldOut?.includes(size) ?? false })),
+          soldOut: isSoldOut(option),
+        })),
+      };
+    }),
+  ),
+});
