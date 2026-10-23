@@ -165,10 +165,9 @@
 
 ## Pendientes
 
-- Confirmar el dominio de producción y otros datos de la clienta (ver `docs/seo.md`).
+- Al entregar, cuando compren el dominio: conectarlo en Vercel como principal (canonical y Open Graph se ajustan solos), alta en Search Console con el sitemap y perfil de Google Business. Confirmar con la clienta dirección y horario si los quiere publicar (ver `docs/seo.md`).
 - Logo vectorial y nombre de la fuente original.
 - Validar la copy y los títulos de las piezas (incluidos los nombres de los modelos de la colección).
 - Decidir con la clienta si el formulario de Cita se queda, se recorta o se quita (hoy convive con el botón directo a WhatsApp).
 - Marcar en `data/collection.ts` las tallas que se vendan (por ejemplo, después del open house).
 - Si se agrega una FAQ: sumar `FAQPage` al schema.
-- Configurar el deploy en Vercel.
