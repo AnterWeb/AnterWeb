@@ -11,6 +11,8 @@ export type Size = (typeof sizes)[number];
 export interface CollectionOption {
   /** Lo que se elige en la tarjeta: un color ("Negro") o una prenda del conjunto ("Pantalón negro") */
   label: string;
+  /** Nombre completo de la prenda cuando no es "modelo + color" (las prendas del conjunto) */
+  name?: string;
   /** Color de la muestra, tomado de la foto */
   swatch: string;
   /** ids de `photos` (work.ts); la primera es la portada de la opción */
@@ -91,6 +93,7 @@ export const collection: CollectionPiece[] = [
     options: [
       {
         label: 'Blusa lila',
+        name: 'Blusa de un hombro lila',
         swatch: '#c8aecb',
         photos: ['disponible-blusa-lila'],
         focus: '50% 20%',
@@ -99,6 +102,7 @@ export const collection: CollectionPiece[] = [
       },
       {
         label: 'Pantalón negro',
+        name: 'Pantalón negro',
         swatch: '#232321',
         photos: ['disponible-blusa-lila'],
         focus: '50% 100%',
@@ -108,6 +112,10 @@ export const collection: CollectionPiece[] = [
     ],
   },
 ];
+
+/** Nombre de la prenda tal como se vende: "Vestido halter negro", "Blusa de un hombro lila". Lo usan el JSON-LD y llms.txt. */
+export const productName = (piece: CollectionPiece, option: CollectionOption) =>
+  option.name ?? `${piece.title} ${option.label.toLowerCase()}`;
 
 /** La opción no tiene ninguna talla disponible. */
 export const isSoldOut = (option: CollectionOption) => option.sizes.every((size) => option.soldOut?.includes(size));

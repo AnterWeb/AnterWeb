@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-23: v0.9.1 (SEO)
+
+- **Dominio:** canonical, `og:url`, `og:image`, sitemap, robots y JSON-LD apuntaban a `anter-house.vercel.app`, que da 404 (al compartir el enlace no salía la imagen). Ahora salen de `VERCEL_PROJECT_PRODUCTION_URL`: hoy `alter-psi-two.vercel.app` y, cuando se conecte el dominio de la clienta, ese, sin tocar código.
+- **JSON-LD:** la colección entra como `ItemList` de `Product` con precio, tallas y disponibilidad (`InStock`/`SoldOut`). `productName` da el nombre de venta de cada prenda (también en `llms.txt`).
+- **Description:** menciona la colección Otoño/Invierno 2026.
+
 ## 2026-10-23: v0.9 (tercera ronda de la clienta y pantalla de carga)
 
 - **Nuestra esencia:** sin los pies "Fig. n" (la clienta los quitó). Las dos fotos chicas del collage crecen (corte de 26 % a 36 % del collage, prueba de tela de 24 % a 34 %) y el collage es un poco más alto. Se eliminó `ui/FigCaption.astro` y el campo `caption` de las fotos, que ya nadie usaba.

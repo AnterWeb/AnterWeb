@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 import { site } from '../data/site';
 import { expressSurcharge, priceList, priceNote, services } from '../data/services';
 import { defaultDescription } from '../data/seo';
-import { collection, collectionTitle, isSoldOut, type CollectionOption } from '../data/collection';
+import { collection, collectionTitle, isSoldOut, productName, type CollectionOption } from '../data/collection';
 import { mxn } from '../data/format';
 
 const pesos = (value: number) => `${mxn(value)} MXN`;
@@ -34,7 +34,7 @@ export const GET: APIRoute = ({ site: siteUrl }) => {
     `## Piezas disponibles: ${collectionTitle}`,
     'Prendas terminadas a la venta. Para pedir una, escribe por WhatsApp.',
     ...collection.flatMap((piece) =>
-      piece.options.map((option) => `- ${piece.title}, ${option.label}: ${pesos(option.price)} (${available(option)})`),
+      piece.options.map((option) => `- ${productName(piece, option)}: ${pesos(option.price)} (${available(option)})`),
     ),
     '',
     '## Contacto',
