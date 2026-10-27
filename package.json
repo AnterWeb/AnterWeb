@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "og": "node scripts/og-image.mjs"
+    "og": "node scripts/og-image.mjs",
+    "favicon": "node scripts/favicon.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",

@@ -8,6 +8,8 @@
 - **Proceso:** sin los números 01–04.
 - **Fondo hueso en todo el sitio** (`--fondo`, `#ECE6D9`): página, hero, velo del header, ticker, pantalla de carga, texto claro de las píldoras oscuras y el hueco del anillo de las muestras de color. El salvia queda como color del logo (favicon) y acento en el menú y el lightbox; `theme-color` pasa a hueso.
 - **Diseños:** sin descripción en las tarjetas ni en el lightbox de Novias y Fiesta (el nombre queda para lectores de pantalla).
+- **Favicon:** la A del logo en hueso sobre tinta (invertido en modo oscuro), en lugar de la A genérica dibujada a mano; ahora también hay `favicon.ico` y `apple-touch-icon.png` (`scripts/favicon.mjs`, `npm run favicon`).
+- **Imagen para compartir:** la portada pasa al fondo hueso (`npm run og`).
 - **Servicios:** "Mamá y hermanas de novios, fiesta y cocktail." pasa a Vestidos a la medida; Novias queda "Novias, despedidas y civiles.".
 
 ## 2026-10-23: v0.9.1 (SEO)

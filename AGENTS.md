@@ -20,6 +20,7 @@ npm run build                        # build de producción → dist/
 npm run preview                      # preview del build
 npm run check                        # diagnóstico de tipos (Astro + TS)
 npm run og                           # regenera la imagen para compartir (src/assets/og/portada.jpg)
+npm run favicon                      # regenera el favicon y el ícono del iPhone (public/)
 SITE_URL=https://dominio.mx npm run build   # fuerza el dominio (en Vercel sale solo, ver Despliegue)
 ```
 
@@ -110,6 +111,7 @@ Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) está
 | Preguntas del formulario de contacto | `src/data/contactForm.ts` |
 | Title, description y JSON-LD | `src/data/seo.ts` |
 | Imagen para compartir | `scripts/og-image.mjs` → `src/assets/og/portada.jpg` (`npm run og`) |
+| Favicon e ícono del iPhone | `scripts/favicon.mjs` → `public/favicon.svg`, `favicon.ico`, `apple-touch-icon.png` (`npm run favicon`) |
 | Pantalla de carga | `src/components/layout/Loader.astro` y `src/scripts/motion/loader.ts` (el clip del cuaderno de `src/data/films.ts`) |
 | Plugins GSAP y condición de movimiento | `src/scripts/motion/gsap.ts` |
 

@@ -46,6 +46,8 @@ b e s p o k e   f a s h i o n
 
 `HOUSE` y `bespoke fashion` siguen como texto en Jost: son demasiado pequeños en la imagen para trazarlos con precisión.
 
+**Favicon:** la A del wordmark en hueso sobre tinta (en el modo oscuro del navegador se invierte). Lo genera `scripts/favicon.mjs` (`npm run favicon`) en `public/`: `favicon.svg` (el principal), `favicon.ico` (16, 32 y 48 px) y `apple-touch-icon.png` (180 px, sin esquinas: iOS las redondea). No se dibuja a mano.
+
 **Pendiente:** si la clienta consigue el archivo original del logo (SVG/PDF de Canva), reemplazar los trazos de `data/wordmark.ts`.
 
 ## Paleta
@@ -56,7 +58,7 @@ Valores muestreados directamente de las imágenes de referencia.
 |---|---|---|---|
 | `--hueso` (`--fondo`) | `#ECE6D9` | Pedido de la clienta | **Fondo de todo el sitio**, velo del header, texto claro sobre tinta |
 | `--hueso-soft` (`--fondo-soft`) | `#E1D9C9` | Derivado | Placeholder de imágenes |
-| `--salvia` | `#C5C8AD` | Fondo del logo | Favicon y acento sobre tinta (menú, lightbox) |
+| `--salvia` | `#C5C8AD` | Fondo del logo | Acento sobre tinta (menú, lightbox) |
 | `--salvia-deep` | `#8E9274` | Derivado | Texto secundario sobre tinta (menú) |
 | `--lino` | `#EFF0E0` | Fondo del flyer | Papel del flyer, texto sobre tinta |
 | `--tinta` | `#23261C` | Tinta del wordmark | Texto, botón Menú, overlay del menú |

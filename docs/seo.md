@@ -20,7 +20,7 @@ Hasta el 2026-10-23 el valor por defecto era `anter-house.vercel.app`, que no ex
 
 ## Imagen para compartir (`npm run og`)
 
-La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una portada de revista hecha con el sitio: ANTER a todo lo ancho como cabecera, el satín drapeado (`proceso-manos`) subiendo detrás de sus letras, "HOUSE" y "bespoke fashion" a los lados, la colección como titular en Italiana y la diseñadora en blanco y negro con "Hecho a tu medida, puntada a puntada." en vertical.
+La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una portada de revista hecha con el sitio, sobre el fondo hueso: ANTER a todo lo ancho como cabecera, el satín drapeado (`proceso-manos`) subiendo detrás de sus letras, "HOUSE" y "bespoke fashion" a los lados, la colección como titular en Italiana y la diseñadora en blanco y negro con "Hecho a tu medida, puntada a puntada." en vertical.
 
 - `scripts/og-image.mjs` la dibuja como HTML con las fuentes de Fontsource, los tokens de `global.css`, el wordmark de `data/wordmark.ts` y la temporada de `data/collection.ts`; la captura con Chrome sin ventana a 2x y la guarda reducida en `src/assets/og/portada.jpg`.
 - Al cambiar de temporada o de fotos: `npm run og` (en la Mac; en otro sistema, `CHROME=ruta npm run og`) y commit de la imagen.

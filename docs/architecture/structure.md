@@ -37,6 +37,7 @@ src/
 │   └── webgl/                priceFlyer, pushPin, flyerTexture, satin (WebGL puro), shaders/*.glsl
 └── styles/global.css         tokens, reset, utilidades, estados iniciales de animación
 scripts/og-image.mjs          genera la imagen para compartir con Chrome sin ventana (npm run og)
+scripts/favicon.mjs           genera favicon.svg, favicon.ico y apple-touch-icon.png en public/ (npm run favicon)
 ```
 
 ## Convenciones

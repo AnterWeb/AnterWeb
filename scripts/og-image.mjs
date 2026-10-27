@@ -20,7 +20,7 @@ const output = join(root, 'src/assets/og/portada.jpg');
 // Colores: los mismos tokens del sitio
 const css = readFileSync(join(root, 'src/styles/global.css'), 'utf8');
 const token = (name) => css.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, 'i'))[1];
-const [salvia, tinta, terracota] = ['salvia', 'tinta', 'terracota'].map(token);
+const [fondo, tinta, terracota] = ['hueso', 'tinta', 'terracota'].map(token);
 
 // "Colección Otoño/Invierno 2026" → "Colección" + "Otoño/Invierno" + "2026"
 const [label, ...rest] = collectionTitle.split(' ');
@@ -38,7 +38,7 @@ const html = `<!doctype html>
   @font-face { font-family: Jost; src: url(${file('node_modules/@fontsource-variable/jost/files/jost-latin-wght-normal.woff2')}); font-weight: 100 900; }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
-  body { position: relative; background: ${salvia}; color: ${tinta}; font-family: Jost; font-weight: 350; -webkit-font-smoothing: antialiased; }
+  body { position: relative; background: ${fondo}; color: ${tinta}; font-family: Jost; font-weight: 350; -webkit-font-smoothing: antialiased; }
   .display { font-family: Italiana; font-weight: 400; line-height: 0.95; letter-spacing: 0.02em; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
