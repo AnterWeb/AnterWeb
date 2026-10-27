@@ -41,7 +41,7 @@
   width: 2.3rem;
   height: 2.3rem;
   background: var(--tinta);
-  color: var(--salvia);
+  color: var(--fondo);
   font-size: 0.9rem;
   transition: opacity 0.3s var(--ease-out);
 }
@@ -98,7 +98,7 @@
   display: block;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  background: var(--salvia-soft);
+  background: var(--fondo-soft);
 }
 
 /* Las fotos de una pieza se apilan; solo la activa es visible (fundido al hojear) */
@@ -228,7 +228,7 @@
   background: var(--swatch);
   box-shadow:
     inset 0 0 0 1px rgb(35 38 28 / 0.16),
-    0 0 0 0 var(--salvia),
+    0 0 0 0 var(--fondo),
     0 0 0 0 var(--tinta);
   transition: box-shadow 0.4s var(--ease-out);
 }
@@ -236,7 +236,7 @@
 .gallery__swatch[aria-checked='true'] {
   box-shadow:
     inset 0 0 0 1px rgb(35 38 28 / 0.16),
-    0 0 0 2.5px var(--salvia),
+    0 0 0 2.5px var(--fondo),
     0 0 0 3.5px var(--tinta);
 }
 

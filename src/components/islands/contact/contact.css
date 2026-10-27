@@ -121,7 +121,7 @@
 
 .cf__ok {
   background: var(--tinta);
-  color: var(--salvia);
+  color: var(--fondo);
 }
 
 .cf__ok:hover {
@@ -189,7 +189,7 @@
 
 .cf__option[aria-checked='true'] {
   background: var(--tinta);
-  color: var(--salvia);
+  color: var(--fondo);
   box-shadow: none;
 }
 
@@ -261,7 +261,7 @@
   width: 2.3rem;
   height: 2.3rem;
   background: var(--tinta);
-  color: var(--salvia);
+  color: var(--fondo);
   font-size: 0.9rem;
   transition: opacity 0.3s var(--ease-out);
 }

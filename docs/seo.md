@@ -59,7 +59,7 @@ La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una porta
 
 ## Rendimiento
 
-La pantalla de carga (`layout/Loader.astro`) tapa el hero unos 2.5 s y pide Three.js al abrir la landing. El HTML ya trae todo el contenido, así que no afecta lo que Google indexa, pero sí retrasa el LCP de la primera visita (la foto principal del hero aparece cuando se abre la hoja). Si las métricas de campo (Search Console › Métricas web principales) salen en "necesita mejorar", la opción es mostrarla una sola vez por sesión.
+La pantalla de carga (`layout/Loader.astro`) tapa el hero unos 2 s (el clip del cuaderno; Three.js ya no se pide al abrir la landing). El HTML ya trae todo el contenido, así que no afecta lo que Google indexa, pero sí retrasa el LCP de la primera visita (la foto principal del hero aparece cuando se abre la hoja). Si las métricas de campo (Search Console › Métricas web principales) salen en "necesita mejorar", la opción es mostrarla una sola vez por sesión.
 
 ## Después del deploy
 

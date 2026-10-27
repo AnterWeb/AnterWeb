@@ -17,7 +17,7 @@ El hero es la referencia de todo el sitio. Sus rasgos:
 - Una tipografía display fina de alto contraste como protagonista: el wordmark gigante.
 - Texto vertical en terracota como acento.
 - Índice numerado con líneas finas de 1 px y flechas en círculo.
-- Fondo salvia continuo, sin bandas de color entre secciones.
+- Fondo hueso continuo (`--fondo`), sin bandas de color entre secciones. Hasta el 2026-10-26 el fondo era salvia; la clienta pidió hueso.
 
 Recursos de revista de moda disponibles (primero usado en Esencia):
 
@@ -54,8 +54,9 @@ Valores muestreados directamente de las imágenes de referencia.
 
 | Token | Hex | Origen | Uso |
 |---|---|---|---|
-| `--salvia` | `#C5C8AD` | Fondo del logo | **Fondo de todo el sitio** |
-| `--salvia-soft` | `#D8DAC6` | Derivado | Placeholder de imágenes |
+| `--hueso` (`--fondo`) | `#ECE6D9` | Pedido de la clienta | **Fondo de todo el sitio**, velo del header, texto claro sobre tinta |
+| `--hueso-soft` (`--fondo-soft`) | `#E1D9C9` | Derivado | Placeholder de imágenes |
+| `--salvia` | `#C5C8AD` | Fondo del logo | Favicon y acento sobre tinta (menú, lightbox) |
 | `--salvia-deep` | `#8E9274` | Derivado | Texto secundario sobre tinta (menú) |
 | `--lino` | `#EFF0E0` | Fondo del flyer | Papel del flyer, texto sobre tinta |
 | `--tinta` | `#23261C` | Tinta del wordmark | Texto, botón Menú, overlay del menú |

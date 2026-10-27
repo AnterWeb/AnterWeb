@@ -1,5 +1,5 @@
 ---
-// Cierre: el wordmark del logo se arma letra por letra con el scroll, sobre el mismo fondo salvia.
+// Cierre: el wordmark del logo se arma letra por letra con el scroll, sobre el mismo fondo de la página.
 // Alrededor, dos clips del taller con la gramática del hero: sueltos a distintas escalas, uno en blanco y negro
 // y un texto vertical en terracota (la página cierra como abre).
 import { getImage } from 'astro:assets';
@@ -106,7 +106,7 @@ const clips = await Promise.all(
   .footer__film figure {
     margin: 0;
     overflow: hidden;
-    background: var(--salvia-soft);
+    background: var(--fondo-soft);
   }
 
   .footer__film video {

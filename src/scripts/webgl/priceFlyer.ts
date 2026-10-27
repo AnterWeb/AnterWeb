@@ -75,7 +75,7 @@ export async function initPriceFlyer(stage: HTMLElement) {
 
   const key = new DirectionalLight('#ffffff', 2.4);
   key.position.set(-2, 3, 4);
-  scene.add(new HemisphereLight('#f6f5ec', '#8e9274', 0.9), key);
+  scene.add(new HemisphereLight('#f6f5ec', '#a99f8c', 0.9), key);
 
   // Reflejos de entorno: dan el brillo realista del plástico de la chinche.
   const pmrem = new PMREMGenerator(renderer);

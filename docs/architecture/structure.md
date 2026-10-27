@@ -7,7 +7,7 @@
 | `astro` 7 | Framework, salida estática |
 | `@astrojs/react`, `react` 19 | Isla de la galería |
 | `gsap` 3 + `@gsap/react` | ScrollSmoother, ScrollTrigger, `useGSAP` |
-| `three` r186 | Flyer de precios y tijeras de la pantalla de carga en WebGL (import dinámico) |
+| `three` r186 | Flyer de precios en WebGL (import dinámico) |
 | `@fontsource/italiana`, `@fontsource-variable/jost` | Fuentes self-hosted |
 | `@astrojs/check`, `typescript`, `@types/*` | `npm run check` |
 
@@ -34,7 +34,7 @@ src/
 ├── scripts/
 │   ├── menu.ts, ticker.ts
 │   ├── motion/               gsap, smooth, reveal, hero, pointerDepth, footer, films, loader
-│   └── webgl/                priceFlyer, pushPin, flyerTexture, satin (WebGL puro), loaderScene, scissors, paperFlaps, shaders/*.glsl
+│   └── webgl/                priceFlyer, pushPin, flyerTexture, satin (WebGL puro), shaders/*.glsl
 └── styles/global.css         tokens, reset, utilidades, estados iniciales de animación
 scripts/og-image.mjs          genera la imagen para compartir con Chrome sin ventana (npm run og)
 ```

@@ -12,6 +12,13 @@
   --tinta-soft: #4a4d40;
   --terracota: #b4552f;     /* acento tomado del vestido de satín */
 
+  /* Fondo de la página: hueso (pedido de la clienta, 2026-10-26). El salvia queda como color del logo
+     y acento en el menú y el lightbox. */
+  --hueso: #ece6d9;
+  --hueso-soft: #e1d9c9;    /* lugar de las fotos mientras cargan */
+  --fondo: var(--hueso);
+  --fondo-soft: var(--hueso-soft);
+
   --line: color-mix(in srgb, var(--tinta) 18%, transparent);
 
   /* Tipografía */
@@ -38,12 +45,12 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  background: var(--salvia);
+  background: var(--fondo);
 }
 
 body {
   margin: 0;
-  background: var(--salvia);
+  background: var(--fondo);
   color: var(--tinta);
   font-family: var(--font-sans);
   font-weight: 350;
@@ -88,7 +95,7 @@ ol {
 
 ::selection {
   background: var(--tinta);
-  color: var(--salvia);
+  color: var(--fondo);
 }
 
 :focus-visible {

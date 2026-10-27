@@ -1,4 +1,5 @@
-// Clips del taller que cierran la página, alrededor del wordmark del footer. Los mandó la clienta (2026-10-23).
+// Clips del taller que mandó la clienta (2026-10-23): cierran la página alrededor del wordmark del footer,
+// y el del cuaderno, en blanco y negro, es también la pantalla de carga (layout/Loader.astro).
 // Son loops MP4 sin audio en public/video/ y sus pósters en src/assets/video/ (ver docs/content/portfolio.md).
 import type { ImageMetadata } from 'astro';
 import cuadernoPoster from '../assets/video/cuaderno-poster.jpg';
@@ -30,3 +31,9 @@ export const films: Film[] = [
     note: 'est. 2024',
   },
 ];
+
+export const filmById = (id: string) => {
+  const film = films.find((f) => f.id === id);
+  if (!film) throw new Error(`Clip no encontrado: ${id}`);
+  return film;
+};

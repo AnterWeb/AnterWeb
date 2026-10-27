@@ -6,7 +6,7 @@ No es una barra típica. Son tres piezas fijas, en `slot="fixed"` del Layout:
 
 - Sin fondo ni barra. A la izquierda va la marca apilada `ANTER / HOUSE`. A la derecha van los íconos de Instagram y WhatsApp, el enlace "Agenda tu cita" y el botón **Menú** (píldora tinta).
 - Con el menú abierto (`html.menu-open`), el header pasa a tono claro.
-- Un velo en degradado salvia (`::before`) hace que el contenido se desvanezca bajo la marca al hacer scroll.
+- Un velo en degradado del color de la página (`::before`, `--fondo`) hace que el contenido se desvanezca bajo la marca al hacer scroll.
 
 ## Menú a pantalla completa (`layout/Menu.astro` + `scripts/menu.ts`)
 

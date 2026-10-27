@@ -1,29 +1,27 @@
 ---
-// Pantalla de carga: una hoja de papel de patrón (lino) con ANTER impreso y una puntada que lo atraviesa.
-// Unas tijeras de sastre en 3D aterrizan, cortan la puntada, se van, y la hoja se abre en dos solapas
-// (cada una con su mitad de la palabra) que descubren la página.
-// La orquesta scripts/motion/loader.ts (tijeras en scripts/webgl/scissors.ts); el hero espera a que se abra.
+// Pantalla de carga: el clip del cuaderno que se hojea, en blanco y negro, sobre el fondo y con el wordmark debajo.
+// Cuando la página está lista, el clip vuela al lugar de la foto en blanco y negro del hero (la misma escena:
+// la diseñadora en su cuaderno) y se funde en ella mientras entra el resto del hero.
+// La orquesta scripts/motion/loader.ts; el hero espera a que se abra (afterLoader).
 // Solo existe con JS y movimiento permitido. Si el script no corre, se desvanece sola (loader-failsafe).
+import { getImage } from 'astro:assets';
 import Wordmark from '../ui/Wordmark.astro';
+import { filmById } from '../../data/films';
 
-// Las dos solapas llevan la misma palabra en el mismo lugar: cada una recorta su mitad.
-const halves = ['top', 'bottom'] as const;
+const film = filmById('cuaderno');
+const poster = await getImage({ src: film.poster, width: 640, format: 'webp' });
 ---
 
 <div class="loader" data-loader aria-hidden="true">
-  {halves.map((side) => (
-    <div class:list={['loader__half', `loader__half--${side}`]} data-loader-half>
-      <div class="loader__mark">
-        <Wordmark letterAttr="data-loader-letter" />
-      </div>
-      <span class="loader__crop loader__crop--start"></span>
-      <span class="loader__crop loader__crop--end"></span>
+  <div class="loader__panel" data-loader-panel></div>
+  <div class="loader__center">
+    <figure class="loader__film" data-loader-film>
+      <video src={film.src} poster={poster.src} muted loop playsinline preload="auto" disablepictureinpicture></video>
+    </figure>
+    <div class="loader__mark">
+      <Wordmark letterAttr="data-loader-letter" />
     </div>
-  ))}
-  <div class="loader__seam" data-loader-seam>
-    <span class="loader__stitch" data-loader-stitch></span>
   </div>
-  <div class="loader__stage" data-loader-stage></div>
 </div>
 
 <style>
@@ -37,11 +35,7 @@ const halves = ['top', 'bottom'] as const;
       position: fixed;
       inset: 0;
       z-index: 200;
-      perspective: 1800px;
       animation: loader-failsafe 0.6s ease 6s forwards;
-      /* Hasta dónde va el corte (px desde la izquierda) y qué tanto se abre la rendija: los mueve el script */
-      --cut: 0px;
-      --gap: 0px;
     }
   }
 
@@ -52,48 +46,41 @@ const halves = ['top', 'bottom'] as const;
     }
   }
 
-  /* Solapas de papel. Comparten el borde en 50 % (mismo redondeo, sin rendija).
-     El corte es una cuña: la rendija se abre detrás de las tijeras y se cierra en la punta del corte. */
-  .loader__half {
+  .loader__panel {
     position: absolute;
-    inset-inline: 0;
+    inset: 0;
+    background: var(--fondo);
+  }
+
+  .loader__center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: clamp(1.2rem, 2.4vw, 1.8rem);
+  }
+
+  /* El clip, como una foto suelta del collage: se destapa de abajo hacia arriba (lo anima el script) */
+  .loader__film {
+    width: clamp(9rem, 15vw, 14rem);
+    aspect-ratio: 2 / 3;
+    margin: 0;
     overflow: hidden;
-    background: var(--lino);
-    transition: box-shadow 0.6s var(--ease-out);
+    background: var(--fondo-soft);
+    clip-path: inset(100% 0 0 0);
   }
 
-  .loader__half--top {
-    top: 0;
-    bottom: 50%;
-    transform-origin: 50% 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--gap)));
+  .loader__film video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.06);
   }
 
-  .loader__half--bottom {
-    top: 50%;
-    bottom: 0;
-    transform-origin: 50% 100%;
-    clip-path: polygon(0 var(--gap), var(--cut) 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  /* Ya cortada de lado a lado: sin recorte (dejaría fuera la sombra del borde) */
-  .loader.is-opening .loader__half {
-    clip-path: none;
-  }
-
-  .loader.is-opening .loader__half--top {
-    box-shadow: 0 16px 40px -20px rgb(35 38 28 / 0.5);
-  }
-
-  .loader.is-opening .loader__half--bottom {
-    box-shadow: 0 -16px 40px -20px rgb(35 38 28 / 0.5);
-  }
-
-  /* La palabra, centrada sobre la puntada: cada solapa muestra su mitad */
   .loader__mark {
-    position: absolute;
-    left: 50%;
-    width: min(40vw, 640px);
+    width: clamp(6.5rem, 10vw, 9rem);
     color: var(--tinta);
   }
 
@@ -102,83 +89,13 @@ const halves = ['top', 'bottom'] as const;
     opacity: 0;
   }
 
-  .loader__half--top .loader__mark {
-    bottom: 0;
-    translate: -50% 50%;
-  }
-
-  .loader__half--bottom .loader__mark {
-    top: 0;
-    translate: -50% -50%;
-  }
-
-  /* Marcas de corte en las esquinas, como en una hoja de patrón */
-  .loader__crop {
-    position: absolute;
-    width: 1.1rem;
-    height: 1.1rem;
-    border-color: color-mix(in srgb, var(--tinta) 38%, transparent);
-    border-style: solid;
-    border-width: 0;
-  }
-
-  .loader__half--top .loader__crop {
-    top: var(--gutter);
-    border-top-width: 1px;
-  }
-
-  .loader__half--bottom .loader__crop {
-    bottom: var(--gutter);
-    border-bottom-width: 1px;
-  }
-
-  .loader__crop--start {
-    left: var(--gutter);
-    border-left-width: 1px;
-  }
-
-  .loader__crop--end {
-    right: var(--gutter);
-    border-right-width: 1px;
-  }
-
-  /* Puntada a lo ancho: solo queda la parte que falta cortar */
-  .loader__seam {
-    position: absolute;
-    inset-inline: 0;
-    top: 50%;
-    height: 1px;
-    translate: 0 -50%;
-    clip-path: inset(0 0 0 var(--cut));
-  }
-
-  .loader__stitch {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to right,
-      color-mix(in srgb, var(--tinta) 45%, transparent) 0 7px,
-      transparent 7px 13px
-    );
-    transform-origin: left center;
-    transform: scaleX(0);
-  }
-
-  .loader__stage {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .loader__stage :global(canvas) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
   @media (max-width: 860px) {
+    .loader__film {
+      width: 42vw;
+    }
+
     .loader__mark {
-      width: 72vw;
+      width: 30vw;
     }
   }
 </style>

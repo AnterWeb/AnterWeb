@@ -19,7 +19,7 @@ export const site = {
 
 /** Navegación principal. `preview` = id de la pieza (src/data/work.ts) que se muestra en el menú. */
 export const nav = [
-  { n: '01', label: 'Nuestra esencia', href: '#esencia', preview: 'novia-salon' },
+  { n: '01', label: 'Esencia', href: '#esencia', preview: 'novia-salon' },
   { n: '02', label: 'Diseños', href: '#disenos', preview: 'noche-negro' },
   { n: '03', label: 'Piezas disponibles', href: '#disponibles', preview: 'disponible-verde-frente' },
   { n: '04', label: 'Servicios', href: '#servicios', preview: 'taller-terracota' },

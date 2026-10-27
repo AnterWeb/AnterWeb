@@ -123,7 +123,7 @@ export default function Lightbox({ slides, index, origin, cardFor, onClose, onNa
           <span className="gallery__index">
             {String(itemIndex + 1).padStart(2, '0')} / {String(totalItems).padStart(2, '0')}
           </span>
-          <span className="lightbox__title display">{item.title}</span>
+          {item.options && <span className="lightbox__title display">{item.title}</span>}
           {item.photos.length > 1 && (
             <span className="gallery__category">
               Foto {photoIndex + 1} de {item.photos.length}

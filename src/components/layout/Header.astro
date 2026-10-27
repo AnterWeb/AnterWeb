@@ -47,12 +47,12 @@ import { site } from '../../data/site';
     pointer-events: auto;
   }
 
-  /* Velo en salvia: el contenido se desvanece bajo la marca en vez de encimarse */
+  /* Velo del color de la página: el contenido se desvanece bajo la marca en vez de encimarse */
   .header::before {
     content: '';
     position: absolute;
     inset: 0 0 -1.5rem;
-    background: linear-gradient(to bottom, var(--salvia) 35%, color-mix(in srgb, var(--salvia) 0%, transparent));
+    background: linear-gradient(to bottom, var(--fondo) 35%, color-mix(in srgb, var(--fondo) 0%, transparent));
     pointer-events: none;
     transition: opacity 0.5s var(--ease-out);
   }
@@ -108,11 +108,11 @@ import { site } from '../../data/site';
 
   .header__social a:hover {
     background: var(--tinta);
-    color: var(--salvia);
+    color: var(--fondo);
   }
 
   :global(.menu-open) .header__social a:hover {
-    background: var(--salvia);
+    background: var(--fondo);
     color: var(--tinta);
   }
 
@@ -146,7 +146,7 @@ import { site } from '../../data/site';
     padding: 0.7rem 0.8rem 0.7rem 1.2rem;
     border-radius: 999px;
     background: var(--tinta);
-    color: var(--salvia);
+    color: var(--fondo);
     font-size: 0.7rem;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -156,7 +156,7 @@ import { site } from '../../data/site';
   }
 
   :global(.menu-open) .header__menu {
-    background: var(--salvia);
+    background: var(--fondo);
     color: var(--tinta);
   }
 

@@ -26,7 +26,7 @@ Fotos en `src/assets/work/`. Las nuevas se procesan con sharp: se enderezan seg�
 | `fucsia` | Fucsia con flores 3D | fiesta | `noche-fucsia` (`focus` hacia la prenda) |
 | `coral` | Shantung coral con lazo | fiesta | `noche-coral` |
 
-Títulos: los de Novias los dio la clienta (2026-10-12); los de Fiesta son provisionales.
+Títulos: los de Novias los dio la clienta (2026-10-12); los de Fiesta son provisionales. Desde el 2026-10-26 no se muestran en las tarjetas ni en el lightbox (la clienta quitó las descripciones): quedan para lectores de pantalla.
 
 Las fotos `proceso-*` (sesión del taller) están en `photos` pero no en `pieces`: las usan el hero, Esencia y Proceso.
 
@@ -49,7 +49,7 @@ El preview del menú es efímero y puede repetir (Piezas disponibles usa `dispon
 
 ### Clips del footer (`src/data/films.ts`)
 
-Dos clips cortos que mandó la clienta (2026-10-23, `AnaTere1 2.mov` y `AnaTere2.mov`): el boceto que se colorea (960×640) y el cuaderno que se hojea (640×960, en blanco y negro con CSS). Duraban 2.4 s y 1.9 s con un cuadro negro al inicio, así que se convirtieron (AVFoundation en la Mac, sin ffmpeg) a loops H.264 sin audio en `public/video/`:
+Dos clips cortos que mandó la clienta (2026-10-23, `AnaTere1 2.mov` y `AnaTere2.mov`): el boceto que se colorea (960×640) y el cuaderno que se hojea (640×960, en blanco y negro con CSS). El del cuaderno es también la pantalla de carga (`filmById('cuaderno')`). Duraban 2.4 s y 1.9 s con un cuadro negro al inicio, así que se convirtieron (AVFoundation en la Mac, sin ffmpeg) a loops H.264 sin audio en `public/video/`:
 
 - `boceto.mp4`: ida y vuelta (la cámara se desliza lento, así el loop es continuo).
 - `cuaderno.mp4`: fundido de 4 cuadros entre el final y el inicio (las hojas se mueven rápido; un fundido más largo deja fantasmas de la mano).

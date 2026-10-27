@@ -2,7 +2,8 @@
 // con el mouse, la posición horizontal sobre la foto elige la imagen; las rayitas de abajo indican cuántas hay.
 // Cada cambio pasa con la ola de satín (scripts/webgl/satin.ts) sobre el fundido CSS.
 // En touch no hay hover: al tocar se abre el lightbox, que recorre todas las fotos de la pieza.
-// Prendas a la venta (item.options): abajo van sus colores, precio y tallas. Al elegir un color la tarjeta
+// Diseños (Novias, Fiesta) van sin descripción: solo la foto (pedido de la clienta); el nombre queda para lectores de pantalla.
+// Prendas a la venta (item.options): llevan su nombre y abajo sus colores, precio y tallas. Al elegir un color la tarjeta
 // pasa a sus fotos (también con la ola) y solo se hojean las de ese color.
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { satinSwap } from '../../../scripts/webgl/satin';
@@ -106,10 +107,12 @@ export default function GalleryCard({ item, index, onOpen }: Props) {
           )}
         </span>
 
-        <span className="gallery__caption">
-          <span className="gallery__index">{String(index + 1).padStart(2, '0')}</span>
-          <span className="gallery__item-title">{item.title}</span>
-        </span>
+        {options && (
+          <span className="gallery__caption">
+            <span className="gallery__index">{String(index + 1).padStart(2, '0')}</span>
+            <span className="gallery__item-title">{item.title}</span>
+          </span>
+        )}
       </button>
 
       {options && <PieceOptions title={item.title} options={options} choice={choice} onChoose={choose} />}

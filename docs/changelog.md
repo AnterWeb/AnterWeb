@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-26: v0.10 (cuarta ronda de la clienta)
+
+- **Pantalla de carga:** se quitaron las tijeras 3D y las solapas de papel (`webgl/loaderScene.ts`, `scissors.ts`, `paperFlaps.ts` y sus shaders). Ahora es el clip del cuaderno en blanco y negro al centro, con ANTER debajo; al terminar vuela a la foto B/N del hero y se funde en ella. Three.js vuelve a cargarse solo con el flyer.
+- **Índice:** "Esencia" en lugar de "Nuestra esencia" (hero, menú, footer y ticker). El encabezado de la sección sigue diciendo "Nuestra esencia".
+- **Esencia:** "hasta que la pieza quede perfecta".
+- **Proceso:** sin los números 01–04.
+- **Fondo hueso en todo el sitio** (`--fondo`, `#ECE6D9`): página, hero, velo del header, ticker, pantalla de carga, texto claro de las píldoras oscuras y el hueco del anillo de las muestras de color. El salvia queda como color del logo (favicon) y acento en el menú y el lightbox; `theme-color` pasa a hueso.
+- **Diseños:** sin descripción en las tarjetas ni en el lightbox de Novias y Fiesta (el nombre queda para lectores de pantalla).
+- **Servicios:** "Mamá y hermanas de novios, fiesta y cocktail." pasa a Vestidos a la medida; Novias queda "Novias, despedidas y civiles.".
+
 ## 2026-10-23: v0.9.1 (SEO)
 
 - **Dominio:** canonical, `og:url`, `og:image`, sitemap, robots y JSON-LD apuntaban a `anter-house.vercel.app`, que da 404 (al compartir el enlace no salía la imagen). Ahora salen de `VERCEL_PROJECT_PRODUCTION_URL`: hoy `alter-psi-two.vercel.app` y, cuando se conecte el dominio de la clienta, ese, sin tocar código.

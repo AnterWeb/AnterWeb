@@ -16,11 +16,7 @@ export default defineConfig({
   vite: {
     // Three se importa de forma diferida; pre-optimizarlo evita el "504 Outdated Optimize Dep" en dev.
     optimizeDeps: {
-      include: [
-        'three',
-        'three/examples/jsm/environments/RoomEnvironment.js',
-        'three/examples/jsm/utils/BufferGeometryUtils.js',
-      ],
+      include: ['three', 'three/examples/jsm/environments/RoomEnvironment.js'],
     },
   },
 });

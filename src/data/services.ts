@@ -1,16 +1,17 @@
 // Servicios y lista de precios. Precios: flyer "Confección y ajustes" (docs/brand/refs/flyer-confeccion-ajustes.jpg).
-// Textos de servicios: los dictó la clienta (2026-10-12). Precios en MXN. Actualizar aquí; la UI lee de este archivo.
+// Textos de servicios: los dictó la clienta (2026-10-12; mamá y hermanas de novios pasaron a Vestidos a la medida
+// el 2026-10-26). Precios en MXN. Actualizar aquí; la UI lee de este archivo.
 
 export const services = [
   {
     n: '01',
     title: 'Vestidos a la medida',
-    body: 'Cocktail y fiesta.',
+    body: 'Mamá y hermanas de novios, fiesta y cocktail.',
   },
   {
     n: '02',
     title: 'Novias',
-    body: 'Novias, mamás y hermanas de los novios, despedidas y civiles.',
+    body: 'Novias, despedidas y civiles.',
   },
   {
     n: '03',

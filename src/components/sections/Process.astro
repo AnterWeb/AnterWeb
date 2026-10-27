@@ -1,6 +1,6 @@
 ---
-// Proceso: los pasos del taller con fotos del photoshoot. Continúa a Nuestra esencia, por eso no lleva
-// número propio en el ticker. Columnas escalonadas (broken grid) e índices numerados con línea fina.
+// Proceso: los pasos del taller con fotos del photoshoot. Continúa a Esencia, por eso no lleva
+// número propio en el ticker. Columnas escalonadas (broken grid) con línea fina; sin números (pedido de la clienta).
 // Datos en src/data/process.ts.
 import { Image } from 'astro:assets';
 import SectionHeading from '../ui/SectionHeading.astro';
@@ -27,7 +27,6 @@ const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }))
             />
           </figure>
           <div class="process__text" data-reveal>
-            <span class="process__n">{step.n}</span>
             <h3 class="process__title">{step.title}</h3>
             <p class="process__body">{step.body}</p>
           </div>
@@ -58,7 +57,7 @@ const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }))
     aspect-ratio: 3 / 4;
     margin: 0;
     overflow: hidden;
-    background: var(--salvia-soft);
+    background: var(--fondo-soft);
   }
 
   .process__photo :global(img) {
@@ -69,19 +68,12 @@ const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }))
 
   .process__text {
     display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.9rem;
     row-gap: 0.4rem;
     margin-top: 1rem;
     padding-top: 0.9rem;
     border-top: 1px solid var(--line);
   }
 
-  .process__n {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    color: var(--terracota);
-  }
 
   .process__title {
     font-size: 0.86rem;
@@ -91,7 +83,6 @@ const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }))
   }
 
   .process__body {
-    grid-column: 2;
     font-size: 0.88rem;
     color: var(--tinta-soft);
   }
@@ -102,12 +93,5 @@ const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }))
       row-gap: 2.5rem;
     }
 
-    .process__text {
-      grid-template-columns: 1fr;
-    }
-
-    .process__body {
-      grid-column: 1;
-    }
   }
 </style>

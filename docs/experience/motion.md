@@ -33,7 +33,7 @@ Principio: **elegante y amortiguado**. El movimiento acompaña al scroll; nunca 
 
 | Script | Dónde | Qué hace |
 |---|---|---|
-| `loader.ts` | Pantalla de carga | La coreografía de las tijeras y la hoja (ver abajo) |
+| `loader.ts` | Pantalla de carga | El clip del cuaderno y su relevo a la foto B/N del hero (ver abajo) |
 | `hero.ts` | Hero y 404 | Fotos con clip-path (`data-photo`), letras con stagger (`data-letter`, spans o paths del SVG) y parallax (`data-drift`, puede envolver foto + pie). En la landing la entrada espera a que se abra la pantalla de carga (`afterLoader`) |
 | `pointerDepth.ts` | 404 | Fotos con profundidad según el cursor (`data-depth`) |
 | `footer.ts` | Footer | El wordmark se arma letra por letra con el scroll |
@@ -55,17 +55,16 @@ Principio: **elegante y amortiguado**. El movimiento acompaña al scroll; nunca 
 
 ## Pantalla de carga (`layout/Loader.astro` + `motion/loader.ts`)
 
-Una hoja de papel de patrón (lino) con ANTER impreso, marcas de corte en las esquinas y una puntada que atraviesa la palabra. Cuatro tiempos:
+El clip del cuaderno que se hojea (`data/films.ts`, en blanco y negro con CSS) al centro sobre el salvia, con ANTER debajo. Tres tiempos:
 
-1. **Papel** (0–1.1 s): las letras suben en cascada y la puntada se dibuja de izquierda a derecha. Las dos solapas llevan la palabra en el mismo lugar; cada una recorta su mitad, así que se animan juntas (`stagger` por índice dentro de cada copia).
-2. **Aterrizaje**: las tijeras 3D caen desde cerca de la cámara, abiertas y giradas, y se asientan con `power3.out`; la sombra se cierra y oscurece al bajar. Si la página aún no carga (evento `load` + fuentes, máximo 4 s), esperan abriendo y cerrando despacio.
-3. **Corte**: tres o cuatro tijeretazos (tres en móvil). Cada uno abre en 0.16 s retrocediendo un poco, cierra en 0.11 s y empuja hacia adelante. El corte llega hasta donde se cruzan las hojas (junto al perno si están abiertas, en la punta si cierran) y deja una rendija en cuña (`--cut` y `--gap` en el `clip-path` de las solapas) que también parte las letras. La puntada solo queda delante del corte.
-4. **Salida**: las tijeras se levantan hacia la cámara y salen por arriba a la derecha. La hoja HTML se cambia en el mismo cuadro por dos solapas 3D idénticas, que se enrollan desde el corte hacia afuera, y entra el hero (`afterLoader` en `hero.ts`).
+1. **Entrada:** el clip se destapa de abajo hacia arriba (`clip-path`, 1.1 s) y su video pasa de 1.2 a 1, como las fotos del sitio; las letras de ANTER suben en cascada.
+2. **Espera:** al menos una vuelta del clip (`MIN_TIME`, 1.8 s), a que termine la entrada y a que la página cargue (evento `load` + fuentes, máximo 4 s).
+3. **Relevo:** el clip vuela al lugar de la foto en blanco y negro del hero (`.hero__photo--workshop`, la misma escena: la diseñadora con su cuaderno) mientras el salvia se desvanece y entra el hero (`afterLoader` en `hero.ts`); al llegar, se funde en esa foto, que ya está destapada debajo. Si la foto no está a la vista, el clip se encoge y se desvanece.
 
 Respaldos y reglas:
 
 - Solo existe con JS y movimiento permitido. Con reduced motion el script la quita y el hero no espera.
-- Si el script no corre, la hoja se desvanece sola a los 6 s (`loader-failsafe` en el CSS).
-- Sin WebGL, o si Three.js tarda más de 1.8 s, la rendija corre sola por la puntada y las solapas HTML se deslizan con una leve inclinación (`slideOpen`).
-- El scroll queda bloqueado (`lockScroll`) hasta que la hoja empieza a abrirse.
-- Dura alrededor de 2.5 s hasta que asoma la página. Se ve en cada carga de la landing (no en la 404).
+- Si el script no corre, se desvanece sola a los 6 s (`loader-failsafe` en el CSS).
+- El scroll queda bloqueado (`lockScroll`) hasta el relevo.
+- Dura alrededor de 2 s. Se ve en cada carga de la landing (no en la 404).
+- Hasta el 2026-10-26 la pantalla de carga eran unas tijeras 3D que cortaban una hoja de papel; la clienta pidió quitarlas y usar este clip.
