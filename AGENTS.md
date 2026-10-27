@@ -30,7 +30,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 
 - Repo `Flouviamx/alter`. Un push a `main` despliega en Vercel; hoy la clienta ve `alter-psi-two.vercel.app`.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
-- Sin GitHub (por ejemplo, si falla el acceso al repo), se publica directo con la CLI: `vercel deploy --prod` desde esta carpeta (vinculada al proyecto `alter` del equipo `flouvia`; `.vercelignore` evita subir `dist/`). Después se sube el commit a `main` para que el repo y producción coincidan.
+- Sin GitHub (por ejemplo, si falla el acceso al repo), se publica directo con la CLI al proyecto `alter` del equipo `flouvia` (`.vercelignore` evita subir `dist/`). Si Vercel bloquea el deploy porque el correo del commit no corresponde a una cuenta de GitHub, se publica desde una copia sin `.git`: `git archive HEAD | tar -x -C <carpeta>`, se copia `.vercel/project.json` y ahí `vercel deploy --prod --archive=tgz`. Después se sube el commit a `main` para que el repo y producción coincidan.
 - Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business. Ver [`docs/seo.md`](./docs/seo.md).
 
 ## Arquitectura en una mirada
