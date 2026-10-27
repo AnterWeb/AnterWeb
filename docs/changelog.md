@@ -10,6 +10,7 @@
 - **Diseños:** sin descripción en las tarjetas ni en el lightbox de Novias y Fiesta (el nombre queda para lectores de pantalla).
 - **Favicon:** la A del logo en hueso sobre tinta (invertido en modo oscuro), en lugar de la A genérica dibujada a mano; ahora también hay `favicon.ico` y `apple-touch-icon.png` (`scripts/favicon.mjs`, `npm run favicon`).
 - **Imagen para compartir:** la portada pasa al fondo hueso (`npm run og`).
+- **Diseños:** "Piezas hechas una sola vez." en una sola línea (`SectionHeading wide`; en teléfono se achica lo justo).
 - **Servicios:** "Mamá y hermanas de novios, fiesta y cocktail." pasa a Vestidos a la medida; Novias queda "Novias, despedidas y civiles.".
 
 ## 2026-10-23: v0.9.1 (SEO)

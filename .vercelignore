@@ -1,0 +1,4 @@
+# Despliegue directo con la CLI (vercel deploy --prod): Vercel construye en su lado; no se sube lo generado
+dist/
+.astro/
+node_modules/

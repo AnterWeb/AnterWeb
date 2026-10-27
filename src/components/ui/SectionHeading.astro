@@ -5,14 +5,16 @@ interface Props {
   label: string;
   title?: string;
   id?: string;
+  /** El título va en una sola línea (todo el ancho, y en teléfono se achica lo justo) en vez del máximo de 18 caracteres */
+  wide?: boolean;
 }
 
-const { label, title, id } = Astro.props;
+const { label, title, id, wide = false } = Astro.props;
 ---
 
 <header class="section-heading">
   <p class="section-heading__label display" data-reveal>{label}</p>
-  {title && <h2 id={id} class="section-heading__title display" data-reveal>{title}</h2>}
+  {title && <h2 id={id} class:list={['section-heading__title display', { 'section-heading__title--wide': wide }]} data-reveal>{title}</h2>}
 </header>
 
 <style>
@@ -31,5 +33,11 @@ const { label, title, id } = Astro.props;
     font-size: var(--text-title);
     max-width: 18ch;
     line-height: 1.02;
+  }
+
+  /* En teléfono se achica lo justo para seguir en una línea */
+  .section-heading__title--wide {
+    max-width: none;
+    font-size: min(var(--text-title), 7.2vw);
   }
 </style>
