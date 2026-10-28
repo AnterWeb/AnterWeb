@@ -9,7 +9,7 @@ La clienta actualiza la página desde **`/keystatic`**: la colección (prendas, 
 | Esquema del panel (secciones, campos, textos de ayuda) | `keystatic.config.tsx` |
 | Controles a la medida: muestra de color y tallas | `src/cms/fields.tsx` (paleta en `PRESET_COLORS`) |
 | Página del panel con la identidad del sitio | `src/cms/AdminPage.astro`, `src/cms/admin.tsx`, `src/cms/admin.css` |
-| Integración (monta `/keystatic` y `/api/keystatic`) | `cms()` en `astro.config.mjs` |
+| Integración (monta `/keystatic` y `/api/keystatic`) | `cms()` en `astro.config.mjs`; la API es `src/cms/api.ts` |
 | Contenido | `src/content/{coleccion,disenos,proceso,servicios,textos}.json` |
 | Fotos del contenido | `src/assets/cms/<sección>/…` |
 | Lectura para la página (fotos importadas, encuadres, tipos) | `src/data/cms.ts` |
@@ -29,6 +29,10 @@ Contacto (WhatsApp, Instagram, zona: `data/site.ts`), preguntas del formulario (
 ## En local
 
 `npm run dev` y abrir `http://localhost:4322/keystatic`. Sin `PUBLIC_KEYSTATIC_GITHUB_REPO`, el panel guarda en los archivos del proyecto; esos cambios se suben con un commit como cualquier otro.
+
+## Demostración en línea (mientras no hay GitHub)
+
+Para que la clienta conozca el panel antes de la transferencia, se publica con `KEYSTATIC_DEMO=1` (por ejemplo, `vercel deploy --prod --build-env KEYSTATIC_DEMO=1`). Así el build suma el adaptador de Vercel y la función del panel lleva el contenido y sus fotos (`includeFiles`), para que `/keystatic` se pueda recorrer completo. Guardar no escribe nada: `src/cms/api.ts` responde con un aviso (en Vercel el disco es de solo lectura) y el panel muestra una píldora que lo explica. Al activar el modo GitHub se quita `KEYSTATIC_DEMO`.
 
 ## Activarlo en producción (al transferir el proyecto)
 

@@ -79,6 +79,37 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* Aviso de la demostración: una píldora tinta abajo, como el índice de la página */
+.ah-demo {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 1rem;
+  translate: -50% 0;
+  width: min(92vw, 44rem);
+  margin: 0;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  background: #23261c;
+  color: #ece6d9;
+  font: 400 0.8rem/1.45 'Jost Variable', 'Jost', system-ui, sans-serif;
+  text-align: center;
+  box-shadow: 0 10px 30px -14px rgb(35 38 28 / 0.6);
+  pointer-events: none;
+}
+
+.ah-demo strong {
+  font-weight: 500;
+  color: #e7b9a3;
+}
+
+@media (max-width: 640px) {
+  .ah-demo {
+    border-radius: 18px;
+    font-size: 0.74rem;
+  }
+}
+
 /* ---------- Campos a la medida (src/cms/fields.tsx) ---------- */
 
 .ah-field {
