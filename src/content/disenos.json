@@ -1,0 +1,156 @@
+{
+  "novias": [
+    {
+      "nombre": "Vestido de novia",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/novias/0/fotos/0/imagen.jpg",
+          "descripcion": "Novia con vestido blanco de escote barco y cola, sosteniendo alcatraces junto a un ventanal",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/novias/0/fotos/1/imagen.jpg",
+          "descripcion": "Detalle de vestido de novia con cintura plisada y ramo de alcatraces",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/novias/0/fotos/2/imagen.jpg",
+          "descripcion": "Novia de espaldas junto a un balcón, con velo largo y moño en la espalda del vestido",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Despedida",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/novias/1/fotos/0/imagen.jpg",
+          "descripcion": "Mujer con vestido blanco midi drapeado caminando por una terraza con columnas",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/novias/1/fotos/1/imagen.jpg",
+          "descripcion": "Vestido blanco de satín con flores en la cintura y cola lateral, reflejado en un espejo",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/novias/1/fotos/2/imagen.jpg",
+          "descripcion": "Detalle de flores blancas aplicadas sobre un vestido drapeado",
+          "encuadre": "centro"
+        }
+      ]
+    }
+  ],
+  "fiesta": [
+    {
+      "nombre": "Lila con capa",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/0/fotos/0/imagen.jpg",
+          "descripcion": "Mujer con vestido largo de satín lila de un hombro y abertura, caminando en un jardín entre edificios",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/0/fotos/1/imagen.jpg",
+          "descripcion": "Vestido lila de un hombro con capa de gasa morada levantada al viento",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/0/fotos/2/imagen.jpg",
+          "descripcion": "Vestido lila de satín con la capa morada en movimiento, de cuerpo completo",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Fucsia strapless con olán",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/1/fotos/0/imagen.jpg",
+          "descripcion": "Vestido largo fucsia strapless con olán lateral y abertura, frente a un arreglo de flores blancas",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/1/fotos/1/imagen.jpg",
+          "descripcion": "Vestido fucsia de escote escultórico y abertura al frente, en un salón con velas",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/1/fotos/2/imagen.jpg",
+          "descripcion": "Mujer con vestido fucsia del brazo de un señor de traje, entrando a un salón lleno de invitados",
+          "encuadre": "derecha"
+        }
+      ]
+    },
+    {
+      "nombre": "Strapless negro con rosa",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/2/fotos/0/imagen.jpg",
+          "descripcion": "La diseñadora sonríe mientras ajusta el vestido negro strapless con rosa de satín sobre un maniquí",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/2/fotos/1/imagen.jpg",
+          "descripcion": "Vestido largo negro strapless con una rosa de satín rosa en la cintura",
+          "encuadre": "centro"
+        },
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/2/fotos/2/imagen.jpg",
+          "descripcion": "Foto en blanco y negro de la diseñadora junto al vestido negro strapless con rosa, en el maniquí",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Satín terracota, un hombro",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/3/fotos/0/imagen.jpg",
+          "descripcion": "Vestido de satín color terracota de un hombro sobre maniquí en el taller",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Azul rey, hombros caídos",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/4/fotos/0/imagen.jpg",
+          "descripcion": "Vestido largo azul rey con hombros caídos frente a un arreglo floral",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Champagne drapeado",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/5/fotos/0/imagen.jpg",
+          "descripcion": "Vestido champagne asimétrico con drapeado lateral sobre maniquí",
+          "encuadre": "centro"
+        }
+      ]
+    },
+    {
+      "nombre": "Fucsia con flores 3D",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/6/fotos/0/imagen.jpg",
+          "descripcion": "Vestido largo fucsia con flores tridimensionales del mismo tono",
+          "encuadre": "derecha"
+        }
+      ]
+    },
+    {
+      "nombre": "Shantung coral con lazo",
+      "fotos": [
+        {
+          "imagen": "/src/assets/cms/disenos/fiesta/7/fotos/0/imagen.jpg",
+          "descripcion": "Vestido largo coral de shantung con gran lazo en la cintura",
+          "encuadre": "izquierda"
+        }
+      ]
+    }
+  ]
+}

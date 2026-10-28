@@ -15,7 +15,12 @@ const AUTO_ADVANCE_MS = 320;
 
 const motionAllowed = () => window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
-export default function ContactForm() {
+interface Props {
+  /** Cargo del arreglo express (hoja de precios del panel) */
+  express: number;
+}
+
+export default function ContactForm({ express }: Props) {
   const [answers, setAnswers] = useState<Answers>({});
   const [index, setIndex] = useState(0);
   const [error, setError] = useState('');
@@ -27,7 +32,8 @@ export default function ContactForm() {
   const interacted = useRef(false);
   const busy = useRef(false);
 
-  const steps = useMemo(() => contactSteps.filter((step) => !step.when || step.when(answers)), [answers]);
+  const allSteps = useMemo(() => contactSteps(express), [express]);
+  const steps = useMemo(() => allSteps.filter((step) => !step.when || step.when(answers)), [allSteps, answers]);
   const isSummary = index >= steps.length;
   const current = isSummary ? null : steps[index];
   const message = useMemo(() => buildWhatsAppMessage(steps, answers), [steps, answers]);

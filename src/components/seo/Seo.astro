@@ -4,8 +4,7 @@
 import { getImage } from 'astro:assets';
 import { site } from '../../data/site';
 import { buildJsonLd, defaultDescription, defaultTitle } from '../../data/seo';
-import { byId } from '../../data/work';
-import { collection } from '../../data/collection';
+import { getCollection, getServices } from '../../data/cms';
 import ogCover from '../../assets/og/portada.jpg';
 
 interface Props {
@@ -22,20 +21,24 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
 
 // Imagen para compartir 1200×630: la portada de revista que arma scripts/og-image.mjs (npm run og).
 const ogAlt =
-  'Portada de Anter House: el wordmark ANTER sobre manos que drapean satín rosa, la colección Otoño/Invierno 2026 y la diseñadora bocetando en el taller';
+  'Portada de Anter House: el wordmark ANTER sobre manos que drapean satín rosa, la colección de temporada y la diseñadora bocetando en el taller';
 const og = await getImage({ src: ogCover, width: 1200, height: 630, format: 'jpg', quality: 90 });
 const ogImage = new URL(og.src, siteUrl).href;
 
 // Fotos de la colección para los productos del JSON-LD (portada de cada opción)
-const productPhotos = new Map<string, string>();
-if (!noindex) {
-  for (const id of new Set(collection.flatMap((piece) => piece.options.map((option) => option.photos[0])))) {
-    const photo = await getImage({ src: byId(id).image, width: 1200, format: 'jpg' });
-    productPhotos.set(id, new URL(photo.src, siteUrl).href);
-  }
-}
-
-const jsonLd = noindex ? null : buildJsonLd(siteUrl, ogImage, (id) => productPhotos.get(id)!);
+const jsonLd = noindex
+  ? null
+  : await (async () => {
+      const [collection, services] = await Promise.all([getCollection(), getServices()]);
+      const urls = new Map<string, string>();
+      for (const option of collection.pieces.flatMap((piece) => piece.options)) {
+        const cover = option.photos[0];
+        if (urls.has(cover.image.src)) continue;
+        const photo = await getImage({ src: cover.image, width: 1200, format: 'jpg' });
+        urls.set(cover.image.src, new URL(photo.src, siteUrl).href);
+      }
+      return buildJsonLd(siteUrl, { imageUrl: ogImage, collection, services, photoUrl: (p) => urls.get(p.image.src)! });
+    })();
 ---
 
 <title>{title}</title>

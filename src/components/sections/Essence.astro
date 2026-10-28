@@ -1,14 +1,15 @@
 ---
 // 01 — Nuestra esencia. Maquetada como página de revista de moda:
-// capital, cuerpo a dos columnas con entrada en versalitas y cita destacada.
+// capital, cuerpo a dos columnas con entrada en versalitas y cita destacada. Los textos se editan en el panel
+// (Textos de la página); las fotos del collage son fijas (work.ts).
 // Copy en borrador: validar con la clienta (docs/pages/home.md).
 import { Image } from 'astro:assets';
 import SectionHeading from '../ui/SectionHeading.astro';
 import WordReveal from '../ui/WordReveal.astro';
 import { byId } from '../../data/work';
+import { getTexts } from '../../data/cms';
 
-const manifesto =
-  'Cada pieza empieza con una conversación. Escuchamos qué quieres sentir el día que la uses y lo traducimos en tela, corte y detalle, construido alrededor de ti.';
+const { esencia } = await getTexts();
 
 // Collage: la diseñadora en su taller (photoshoot). Sin pies de foto (la clienta los quitó, 2026-10-23).
 const figures = [
@@ -24,17 +25,15 @@ const figures = [
       <SectionHeading label="Nuestra esencia" />
       <h2 id="esencia-title" class="sr-only">Nuestra esencia</h2>
 
-      <WordReveal text={manifesto} class="essence__manifesto display" dropCap />
+      <WordReveal text={esencia.manifiesto} class="essence__manifesto display" dropCap />
 
       <p class="essence__body" data-reveal>
-        <span class="essence__lead-in">Proceso personalizado:</span> tomamos tus medidas, elegimos juntas los materiales
-        y probamos sobre el cuerpo hasta que la pieza quede perfecta. Cada prenda pasa por varias pruebas en el taller
-        antes de llegar a ti.
+        {esencia.entrada && <span class="essence__lead-in">{esencia.entrada}</span>} {esencia.cuerpo}
       </p>
 
       <figure class="essence__quote" data-reveal>
-        <blockquote class="display">Diseño propio, pruebas en taller y acabados a mano.</blockquote>
-        <figcaption>Anter House, Monterrey</figcaption>
+        <blockquote class="display">{esencia.cita}</blockquote>
+        {esencia.firma && <figcaption>{esencia.firma}</figcaption>}
       </figure>
     </div>
 

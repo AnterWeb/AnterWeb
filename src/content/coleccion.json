@@ -1,0 +1,225 @@
+{
+  "temporada": "Otoño/Invierno 2026",
+  "intro": "Adquiere tus piezas favoritas de nuestra colección limitada.",
+  "prendas": [
+    {
+      "modelo": "Vestido halter",
+      "opciones": [
+        {
+          "color": "Negro",
+          "muestra": "#1f1d1b",
+          "precio": 1500,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/0/opciones/0/fotos/0/imagen.jpg",
+              "descripcion": "Vestido largo de satín negro con cuello halter, de frente",
+              "encuadre": "centro"
+            },
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/0/opciones/0/fotos/1/imagen.jpg",
+              "descripcion": "Vestido largo de satín negro con la espalda descubierta",
+              "encuadre": "centro"
+            }
+          ]
+        },
+        {
+          "color": "Ivory",
+          "muestra": "#e2d3b3",
+          "precio": 900,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/0/opciones/1/fotos/0/imagen.jpg",
+              "descripcion": "Vestido largo de satín ivory con cuello halter, de frente",
+              "encuadre": "centro"
+            },
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/0/opciones/1/fotos/1/imagen.jpg",
+              "descripcion": "Vestido largo de satín ivory con la espalda descubierta",
+              "encuadre": "centro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelo": "Vestido cuello caído",
+      "opciones": [
+        {
+          "color": "Verde olivo",
+          "muestra": "#7f7a5c",
+          "precio": 1800,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/1/opciones/0/fotos/0/imagen.jpg",
+              "descripcion": "Vestido midi de satín verde olivo con cuello caído, de frente",
+              "encuadre": "centro"
+            },
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/1/opciones/0/fotos/1/imagen.jpg",
+              "descripcion": "Vestido midi de satín verde olivo, de espaldas",
+              "encuadre": "centro"
+            }
+          ]
+        },
+        {
+          "color": "Café",
+          "muestra": "#7a4b2c",
+          "precio": 1800,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/1/opciones/1/fotos/0/imagen.jpg",
+              "descripcion": "Vestido midi de satín café con cuello caído y fruncido en la cadera, de frente",
+              "encuadre": "centro"
+            },
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/1/opciones/1/fotos/1/imagen.jpg",
+              "descripcion": "Vestido midi de satín café, de espaldas",
+              "encuadre": "centro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelo": "Top strapless",
+      "opciones": [
+        {
+          "color": "Café",
+          "muestra": "#3b2219",
+          "precio": 300,
+          "tallas": {
+            "CH": "agotada",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/2/opciones/0/fotos/0/imagen.jpg",
+              "descripcion": "Top strapless café oscuro con jeans acampanados",
+              "encuadre": "centro"
+            }
+          ]
+        },
+        {
+          "color": "Blanco",
+          "muestra": "#f3f1ec",
+          "precio": 300,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/2/opciones/1/fotos/0/imagen.jpg",
+              "descripcion": "Top strapless blanco con jeans acampanados",
+              "encuadre": "centro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelo": "Blusa con encaje",
+      "opciones": [
+        {
+          "color": "Negra",
+          "muestra": "#1b1716",
+          "precio": 450,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/3/opciones/0/fotos/0/imagen.jpg",
+              "descripcion": "Blusa negra de satín con cuello caído y orilla asimétrica de encaje, con jeans",
+              "encuadre": "centro"
+            }
+          ]
+        },
+        {
+          "color": "Café",
+          "muestra": "#5b2d21",
+          "precio": 450,
+          "tallas": {
+            "CH": "agotada",
+            "M": "disponible",
+            "G": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/3/opciones/1/fotos/0/imagen.jpg",
+              "descripcion": "Blusa café de satín con cuello caído y orilla asimétrica de encaje, con jeans",
+              "encuadre": "centro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelo": "Blusa de un hombro y pantalón",
+      "opciones": [
+        {
+          "color": "Blusa lila",
+          "muestra": "#c8aecb",
+          "precio": 500,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible",
+            "EG": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/4/opciones/0/fotos/0/imagen.jpg",
+              "descripcion": "Blusa lila de satín de un hombro con pantalón negro de satín",
+              "encuadre": "arriba"
+            }
+          ],
+          "nombre": "Blusa de un hombro lila"
+        },
+        {
+          "color": "Pantalón negro",
+          "muestra": "#232321",
+          "precio": 800,
+          "tallas": {
+            "CH": "disponible",
+            "M": "disponible",
+            "G": "disponible",
+            "EG": "disponible"
+          },
+          "fotos": [
+            {
+              "imagen": "/src/assets/cms/coleccion/prendas/4/opciones/1/fotos/0/imagen.jpg",
+              "descripcion": "Blusa lila de satín de un hombro con pantalón negro de satín",
+              "encuadre": "abajo"
+            }
+          ],
+          "nombre": "Pantalón negro"
+        }
+      ]
+    }
+  ]
+}

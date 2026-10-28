@@ -1,0 +1,25 @@
+---
+// Página del panel (/keystatic): la app de Keystatic vestida con la identidad del sitio (admin.css).
+// La inyecta la integración de astro.config.mjs en lugar de la página genérica de Keystatic.
+import '@fontsource/italiana/400.css';
+import '@fontsource-variable/jost';
+import './admin.css';
+import { Admin } from './admin';
+
+export const prerender = false;
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#ece6d9" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Panel | Anter House</title>
+  </head>
+  <body>
+    <Admin client:only="react" />
+  </body>
+</html>

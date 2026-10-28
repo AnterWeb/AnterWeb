@@ -11,7 +11,7 @@ Una pregunta a la vez. Al final arma un mensaje y abre WhatsApp (`wa.me`) ya esc
 | Nombre | texto | Obligatorio. El primer nombre se usa en la siguiente pregunta ("Mucho gusto, {name}") |
 | Qué busca | opción | Novia / noche o evento / confección y ajustes / otra cosa |
 | Para cuándo | opción | Ayuda a priorizar; los vestidos a la medida necesitan pruebas |
-| Arreglo express | opción | **Solo si eligió "Confección y ajustes"** (`when`); muestra el costo desde `services.ts` |
+| Arreglo express | opción | **Solo si eligió "Confección y ajustes"** (`when`); muestra el costo de la hoja de precios del panel (prop `express`) |
 | Horario | opción | Mañanas / tardes / me adapto (no promete días de apertura) |
 | Idea | textarea | Opcional |
 

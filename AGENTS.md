@@ -1,6 +1,6 @@
 # Anter House — Guía del proyecto
 
-Portafolio web de **Anter House, bespoke fashion**: taller de moda a la medida en Monterrey (novias, vestidos de fiesta, confección y ajustes) con una colección de prendas a la venta. Proyecto de Flouvia para la clienta.
+Portafolio web de **Anter House, bespoke fashion**: taller de moda a la medida en Monterrey (novias, vestidos de fiesta, confección y ajustes) con una colección de prendas a la venta. Proyecto de Flouvia para la clienta, que actualiza el contenido desde su panel (`/keystatic`, [`docs/cms.md`](./docs/cms.md)).
 
 Este archivo es el **índice**. `CLAUDE.md` es un symlink a este mismo archivo. Aquí solo van las reglas globales; cada área tiene su documento en `docs/`, que hay que leer antes de editarla.
 
@@ -14,7 +14,7 @@ Este archivo es el **índice**. `CLAUDE.md` es un symlink a este mismo archivo. 
 ## Comandos
 
 ```bash
-astro dev --port 4322 --background   # servidor local en segundo plano (4321 lo usa Flouvia)
+astro dev --port 4322 --background   # servidor local en segundo plano (4321 lo usa Flouvia); el panel en /keystatic
 astro dev stop | status | logs       # administrar el servidor en segundo plano
 npm run build                        # build de producción → dist/
 npm run preview                      # preview del build
@@ -31,7 +31,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 - Repo `Flouviamx/alter`. Un push a `main` despliega en Vercel; hoy la clienta ve `alter-psi-two.vercel.app`.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
 - Sin GitHub (por ejemplo, si falla el acceso al repo), se publica directo con la CLI al proyecto `alter` del equipo `flouvia` (`.vercelignore` evita subir `dist/`). Si Vercel bloquea el deploy porque el correo del commit no corresponde a una cuenta de GitHub, se publica desde una copia sin `.git`: `git archive HEAD | tar -x -C <carpeta>`, se copia `.vercel/project.json` y ahí `vercel deploy --prod --archive=tgz`. Después se sube el commit a `main` para que el repo y producción coincidan.
-- Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business. Ver [`docs/seo.md`](./docs/seo.md).
+- Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)); transferir el repo a la cuenta de GitHub de la clienta y activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)).
 
 ## Arquitectura en una mirada
 
@@ -44,6 +44,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 | 3D | Three.js (r186) para el flyer de precios, cargado con `import()` |
 | Tipografía | Italiana (display) + Jost (texto), self-hosted vía Fontsource |
 | Imágenes | `astro:assets` (`<Image>` / `getImage`) desde `src/assets/` |
+| Panel de la clienta | Keystatic (`keystatic.config.tsx`, `src/cms/`): contenido en `src/content/*.json`, fotos en `src/assets/cms/`; en producción guarda en el repo de GitHub de la clienta |
 | Idioma | Solo español (`es-MX`) |
 
 ## Reglas globales
@@ -58,7 +59,8 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
   - `components/islands/<nombre>/`: islas React con sus subcomponentes, tipos y CSS.
   - `components/seo/`: el `<head>` de SEO.
 - La lógica JS no vive en el markup: va en `src/scripts/` (`motion/`, `webgl/`), y el componente solo importa e inicializa.
-- Contenido y datos en `src/data/`. La UI, el JSON-LD, la textura WebGL y `llms.txt` leen de ahí. Nunca hardcodees teléfonos, precios, piezas ni el dominio.
+- **Lo que la clienta edita vive en el panel** (`src/content/*.json`, leído por `src/data/cms.ts`): Diseños, la colección, Proceso, servicios con su hoja de precios y los textos de Esencia, Piezas disponibles y Cita. No se escribe en componentes ni en `src/data/`. Lo fijo (contacto, fotos del hero y de Esencia, formulario, SEO) sigue en `src/data/`. La UI, el JSON-LD, la textura WebGL y `llms.txt` leen de esas fuentes. Nunca hardcodees teléfonos, precios, piezas ni el dominio.
+- Un campo nuevo del panel lleva etiqueta y ayuda en español pensadas para la clienta, y la página no se rompe si queda vacío. Las fotos del panel no se tocan a mano (Keystatic las nombra y mueve).
 - Reutiliza primitivas existentes antes de crear variantes. Mantén los cambios enfocados.
 
 ### Marca y experiencia
@@ -73,7 +75,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 - Las fotos son de clientas reales: alt descriptivo y recortes que respeten la prenda.
 - **No repitas fotos fuera de la galería**: cada sección usa fotos distintas (ver `docs/content/portfolio.md`).
 - **Una pieza = un vestido.** Fotos del mismo vestido van juntas en una sola tarjeta de la galería, nunca como piezas separadas. En la colección a la venta, una tarjeta = un modelo con sus colores.
-- **Colección:** nunca se publican cantidades por talla, solo si hay o no. Cuando la clienta avise que algo se vendió, la talla va al `soldOut` de su opción en `src/data/collection.ts`.
+- **Colección:** nunca se publican cantidades por talla, solo si hay o no. La clienta marca lo vendido en el panel (la talla pasa a "Sold out").
 - Fotos y videos sueltos no se "pegan": se integran con la gramática del hero (escalas distintas, texto vertical terracota, a lo más uno en blanco y negro). Los clips van como loops MP4 sin audio que solo corren en pantalla.
 - **3D y WebGL a la vara de la chinche del flyer:** materiales físicos, reflejos de estudio, sombra real y coreografía en tiempos (nunca un desplazamiento lineal). Solo si alimentan el concepto del taller (papel, corte, tela); nunca adorno.
 - Todo se valida en móvil (375 y 360 px): sin scroll horizontal ni texto fuera de pantalla.
@@ -92,6 +94,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 | Página 404 | [`docs/pages/not-found.md`](./docs/pages/not-found.md) |
 | SEO: meta, imagen para compartir, JSON-LD, robots, sitemap, llms.txt | [`docs/seo.md`](./docs/seo.md) |
 | Portafolio, fotos, colección a la venta, clips, precios y contacto | [`docs/content/portfolio.md`](./docs/content/portfolio.md) |
+| Panel de la clienta (Keystatic): esquema, tema, campos a la medida y activación en producción | [`docs/cms.md`](./docs/cms.md) |
 | Historial de cambios y pendientes | [`docs/changelog.md`](./docs/changelog.md) |
 
 Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) están en [`docs/brand/refs/`](./docs/brand/refs/).
@@ -104,11 +107,9 @@ Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) está
 | Tokens de color, tipografía y reset | `src/styles/global.css` |
 | Wordmark ANTER (trazos del logo original) | `src/data/wordmark.ts` → `ui/Wordmark.astro` |
 | Contacto y navegación | `src/data/site.ts` |
-| Fotos, piezas (vestidos) y categorías | `src/data/work.ts` |
-| Colección a la venta: colores, precios, tallas y sold out | `src/data/collection.ts` |
+| Contenido editable (lo que cambia la clienta) | `src/content/*.json` vía el panel; esquema en `keystatic.config.tsx`; lectura en `src/data/cms.ts` |
+| Fotos fijas del sitio (hero, Esencia, menú, 404) | `src/data/work.ts` |
 | Clips del footer | `src/data/films.ts` (MP4 en `public/video/`) |
-| Pasos de la sección Proceso | `src/data/process.ts` |
-| Servicios y precios | `src/data/services.ts` |
 | Preguntas del formulario de contacto | `src/data/contactForm.ts` |
 | Title, description y JSON-LD | `src/data/seo.ts` |
 | Imagen para compartir | `scripts/og-image.mjs` → `src/assets/og/portada.jpg` (`npm run og`) |
@@ -123,6 +124,7 @@ Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) está
 - Cambios de WebGL: verificar el fallback HTML (sin WebGL) y que el canvas no recorte la hoja.
 - Pantalla de carga: capturar la secuencia cuadro por cuadro en desktop y móvil (el clip debe aterrizar sobre la foto B/N del hero) y probar reduced motion (no debe aparecer).
 - Colección: elegir cada color en la tarjeta (fotos, precio y tallas) y revisar `dist/llms.txt` y los `Product` del JSON-LD.
+- Panel: abrir `/keystatic`, entrar a cada sección y guardar una vez; confirmar que la página refleja el cambio y que `src/assets/cms/` no deja fotos huérfanas.
 - Después de un push con cambios de SEO: en el sitio publicado, el canonical apunta al dominio real y el `og:image` responde 200.
 - Cualquier cambio: `git diff --check` y revisar el diff final.
 

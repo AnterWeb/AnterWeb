@@ -1,0 +1,61 @@
+{
+  "servicios": [
+    {
+      "titulo": "Vestidos a la medida",
+      "texto": "Mamá y hermanas de novios, fiesta y cocktail."
+    },
+    {
+      "titulo": "Novias",
+      "texto": "Novias, despedidas y civiles."
+    },
+    {
+      "titulo": "Ajustes",
+      "texto": "Bastillas, ajustes de talle, cambio de cierres y enmiendas."
+    }
+  ],
+  "hoja": {
+    "titulo": "Servicios",
+    "grupos": [
+      {
+        "nombre": "Bastillas",
+        "precios": [
+          {
+            "concepto": "Pantalón y jeans",
+            "precio": 160
+          },
+          {
+            "concepto": "Pantalón de vestir",
+            "precio": 200
+          },
+          {
+            "concepto": "Pantalón de vestir forrado",
+            "precio": 350
+          },
+          {
+            "concepto": "Vestido",
+            "precio": 450
+          },
+          {
+            "concepto": "Vestido forrado",
+            "precio": 600
+          }
+        ]
+      },
+      {
+        "nombre": "Ajustes",
+        "precios": [
+          {
+            "concepto": "Ajustes de talle",
+            "precio": 400
+          },
+          {
+            "concepto": "Cambio de cierre",
+            "precio": 400
+          }
+        ]
+      }
+    ],
+    "express": 200,
+    "nota": "Precios sujetos a valoración de la prenda y trabajo requerido."
+  }
+}

@@ -1,24 +1,26 @@
 ---
 // 03 — Piezas disponibles. La colección a la venta con la misma galería que Diseños: una tarjeta por modelo,
-// con sus colores, precio y tallas (las vendidas dicen "Sold out"). Datos en src/data/collection.ts.
-// Texto de la intro: lo dio la clienta (2026-10-23).
+// con sus colores, precio y tallas (las vendidas dicen "Sold out"). Se edita en el panel (data/cms.ts).
+// Temporada, intro, título y prendas se editan en el panel (Colección a la venta y Textos de la página).
 import SectionHeading from '../ui/SectionHeading.astro';
 import Button from '../ui/Button.astro';
 import WhatsAppIcon from '../ui/icons/WhatsAppIcon.astro';
 import DesignGallery from '../islands/gallery/DesignGallery';
 import { collectionGroup } from '../islands/gallery/groups';
 import { whatsappLink } from '../../data/site';
+import { getCollection, getTexts } from '../../data/cms';
 
+const [{ season, intro }, { disponibles }] = await Promise.all([getCollection(), getTexts()]);
 const groups = [await collectionGroup()];
-const inquiry = whatsappLink('Hola Anter House, me interesa una pieza de la colección Otoño/Invierno 2026.');
+const inquiry = whatsappLink(`Hola Anter House, me interesa una pieza de la colección ${season}.`);
 ---
 
 <section class="available" id="disponibles" aria-labelledby="disponibles-title" data-section="03" data-section-label="Piezas disponibles">
   <div class="wrap">
     <div class="available__head">
-      <SectionHeading label="Piezas disponibles" title="Listas para estrenar." id="disponibles-title" />
+      <SectionHeading label="Piezas disponibles" title={disponibles.titulo} id="disponibles-title" />
       <div class="available__aside" data-reveal>
-        <p><span class="available__season">Otoño/Invierno 2026.</span> Adquiere tus piezas favoritas de nuestra colección limitada.</p>
+        <p><span class="available__season">{season}.</span> {intro}</p>
         <Button href={inquiry} variant="outline" external><WhatsAppIcon size={15} /> Preguntar</Button>
       </div>
     </div>

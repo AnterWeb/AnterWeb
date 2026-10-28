@@ -28,7 +28,10 @@ src/
 │   └── islands/
 │       ├── gallery/          DesignGallery, GalleryRow, GalleryCard, PieceOptions (colores, precio y tallas), Lightbox, transitions (Flip), types, groups (solo servidor), gallery.css
 │       └── contact/          ContactForm, StepText, StepChoice, StepSummary, StepHeader, FormProgress, message, contact.css
-├── data/                     site.ts, work.ts, collection.ts, films.ts, process.ts, services.ts, seo.ts, contactForm.ts, wordmark.ts, format.ts
+├── cms/                      panel de la clienta: AdminPage.astro, admin.tsx, admin.css, fields.tsx (color y tallas)
+├── content/                  contenido del panel: coleccion, disenos, proceso, servicios, textos (.json)
+├── assets/cms/               fotos del panel (las nombra Keystatic; no se tocan a mano)
+├── data/                     cms.ts (lee el panel), site.ts, work.ts (fotos fijas), films.ts, seo.ts, contactForm.ts, wordmark.ts, format.ts
 ├── layouts/Layout.astro      <head>, slot "fixed", wrapper de ScrollSmoother
 ├── pages/                    index, 404, robots.txt, sitemap.xml, llms.txt
 ├── scripts/
@@ -48,4 +51,5 @@ scripts/favicon.mjs           genera favicon.svg, favicon.ico y apple-touch-icon
 - **Scripts**: el componente hace `import { initX } from '../../scripts/...'` y llama `initX(elemento)`.
 - **React** solo para estado real. Algo con `position: fixed` dentro de una isla va con portal a `body`, porque ScrollSmoother transforma el contenido.
 - **Imágenes** siempre desde `src/assets/`: `<Image>` con `widths` y `sizes`, o `getImage()` para pasarlas a una isla o a OG.
-- **Datos**: las fotos se referencian por id con `byId('novia-salon')`; Diseños lee `pieces` (una prenda con varias fotos) y Piezas disponibles lee `collection` (prendas a la venta con colores, precio y tallas). Ver `docs/content/portfolio.md`.
+- **Datos**: lo editable sale del panel con `data/cms.ts` (`getCollection`, `getDesigns`, `getProcess`, `getServices`, `getTexts`); las fotos fijas se piden por id con `byId('novia-salon')`. Ver `docs/cms.md` y `docs/content/portfolio.md`.
+- `keystatic.config.tsx` (raíz) es el esquema del panel; la integración `cms()` de `astro.config.mjs` lo monta en `/keystatic` en local y, en producción, solo con `PUBLIC_KEYSTATIC_GITHUB_REPO`.

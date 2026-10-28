@@ -1,16 +1,22 @@
 ---
-// Hoja de precios: réplica del flyer de la clienta (título en services.ts).
+// Hoja de precios: réplica del flyer de la clienta (se edita en el panel: Servicios y precios).
 import Wordmark from '../ui/Wordmark.astro';
-import { expressSurcharge, priceList, priceListTitle, priceNote } from '../../data/services';
 import { mxn } from '../../data/format';
+import type { PriceSheet } from '../../data/cms';
+
+interface Props {
+  sheet: PriceSheet;
+}
+
+const { sheet } = Astro.props;
 ---
 
 <aside class="prices" aria-labelledby="prices-title" data-reveal>
   <span class="prices__pin" aria-hidden="true"></span>
   <p class="prices__brand"><span class="sr-only">Anter</span><Wordmark /></p>
-  <h3 id="prices-title" class="prices__title eyebrow">{priceListTitle}</h3>
+  <h3 id="prices-title" class="prices__title eyebrow">{sheet.title}</h3>
 
-  {priceList.map((group) => (
+  {sheet.groups.map((group) => (
     <div class="prices__group">
       <h4 class="prices__group-title eyebrow">{group.group}</h4>
       <dl>
@@ -26,10 +32,10 @@ import { mxn } from '../../data/format';
 
   <div class="prices__row prices__row--express">
     <span class="eyebrow">Arreglo express</span>
-    <span>+{mxn(expressSurcharge)}</span>
+    <span>+{mxn(sheet.express)}</span>
   </div>
 
-  <p class="prices__note">* {priceNote}</p>
+  <p class="prices__note">* {sheet.note}</p>
 </aside>
 
 <style>

@@ -15,7 +15,8 @@ export interface GalleryOption {
   swatch: string;
   /** índices de `photos` de la pieza; el primero es la portada de la opción */
   photos: number[];
-  focus?: string;
+  /** encuadre de cada foto en esta opción (índice de `photos` → object-position) */
+  focus: Record<number, string>;
   /** precio con formato ("$1,500") */
   price: string;
   sizes: { size: string; soldOut: boolean }[];

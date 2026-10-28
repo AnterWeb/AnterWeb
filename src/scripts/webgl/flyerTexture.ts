@@ -1,8 +1,8 @@
 // Dibuja el flyer de precios en un canvas 2D para usarlo como textura.
-// Lee los mismos datos que la lista HTML (src/data/services.ts): una sola fuente de verdad.
-import { expressSurcharge, priceList, priceListTitle, priceNote } from '../../data/services';
+// Recibe la misma hoja que la lista HTML (la del panel, data/cms.ts): una sola fuente de verdad.
 import { WORDMARK_HEIGHT, WORDMARK_WIDTH, wordmarkGlyphs } from '../../data/wordmark';
 import { mxn } from '../../data/format';
+import type { PriceSheet } from '../../data/cms';
 
 export const FLYER_WIDTH = 1000;
 export const FLYER_HEIGHT = 1300;
@@ -64,7 +64,7 @@ function drawWordmark(ctx: CanvasRenderingContext2D, centerX: number, baseline: 
   ctx.restore();
 }
 
-export async function createFlyerCanvas() {
+export async function createFlyerCanvas(sheet: PriceSheet) {
   await Promise.all([
     document.fonts.load(`350 30px ${SANS}`),
     document.fonts.load(`400 30px ${SANS}`),
@@ -95,11 +95,11 @@ export async function createFlyerCanvas() {
   ctx.font = `400 22px ${SANS}`;
   drawSpaced(ctx, 'HOUSE', FLYER_WIDTH / 2, 282, 14, 'center');
   ctx.font = `350 26px ${SANS}`;
-  drawSpaced(ctx, priceListTitle.toUpperCase(), FLYER_WIDTH / 2, 346, 9, 'center');
+  drawSpaced(ctx, sheet.title.toUpperCase(), FLYER_WIDTH / 2, 346, 9, 'center');
 
   // Grupos de precios
   let y = 432;
-  for (const group of priceList) {
+  for (const group of sheet.groups) {
     ctx.fillStyle = COLORS.accent;
     ctx.font = `400 22px ${SANS}`;
     drawSpaced(ctx, group.group.toUpperCase(), padX, y, 8);
@@ -139,14 +139,14 @@ export async function createFlyerCanvas() {
   drawSpaced(ctx, 'ARREGLO EXPRESS', padX, y, 9);
   ctx.font = `350 32px ${SANS}`;
   ctx.textAlign = 'right';
-  ctx.fillText(`+${mxn(expressSurcharge)}`, right, y);
+  ctx.fillText(`+${mxn(sheet.express)}`, right, y);
 
   // Nota
   y += 70;
   ctx.fillStyle = COLORS.inkSoft;
   ctx.font = `350 23px ${SANS}`;
   ctx.textAlign = 'left';
-  ctx.fillText(`* ${priceNote}`, padX, y);
+  ctx.fillText(`* ${sheet.note}`, padX, y);
 
   return canvas;
 }

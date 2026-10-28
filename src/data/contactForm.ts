@@ -1,8 +1,8 @@
 // Preguntas del formulario de contacto (isla components/islands/contact).
 // El orden aquí es el orden en pantalla. `when` muestra una pregunta solo si aplica.
 // `{name}` se reemplaza por el nombre que la persona escribió en el primer paso.
+// El cargo del arreglo express sale de la hoja de precios del panel (lo pasa Appointment.astro).
 // Copy en borrador: validar con la clienta.
-import { expressSurcharge } from './services';
 
 export type Answers = Record<string, string>;
 
@@ -30,7 +30,7 @@ export type Step = TextStep | ChoiceStep;
 
 const ALTERATIONS = 'Ajustes';
 
-export const contactSteps: Step[] = [
+export const contactSteps = (expressSurcharge: number): Step[] => [
   {
     id: 'name',
     kind: 'text',

@@ -1,9 +1,8 @@
 // SEO: textos por defecto y JSON-LD. Se construye con los mismos datos que la UI
-// (site.ts, services.ts) para que lo que ven buscadores y personas sea idéntico.
+// (site.ts y el contenido del panel, data/cms.ts) para que lo que ven buscadores y personas sea idéntico.
 // Criterios: docs/seo.md (basado en las skills seo-audit, schema-markup y ai-seo).
 import { site } from './site';
-import { expressSurcharge, priceList, services } from './services';
-import { collection, collectionTitle, isSoldOut, productName } from './collection';
+import { isSoldOut, productName, type CmsPhoto, type getCollection, type getServices } from './cms';
 
 /** 50–60 caracteres, keyword primero, marca al final, sin guiones largos. */
 export const defaultTitle = 'Vestidos a la medida y de novia en Monterrey | Anter House';
@@ -12,22 +11,30 @@ export const defaultTitle = 'Vestidos a la medida y de novia en Monterrey | Ante
 export const defaultDescription =
   'Taller de moda a la medida en Monterrey: vestidos de novia y de fiesta, colección Otoño/Invierno 2026 y ajustes desde $160 MXN. Agenda tu cita por WhatsApp.';
 
+interface JsonLdData {
+  imageUrl?: string;
+  collection: Awaited<ReturnType<typeof getCollection>>;
+  services: Awaited<ReturnType<typeof getServices>>;
+  /** URL absoluta de una foto, para los productos */
+  photoUrl: (photo: CmsPhoto) => string;
+}
+
 /**
  * Grafo JSON-LD: WebSite + negocio local con catálogo de servicios + la colección a la venta.
- * Sin datos inventados. `photoUrl` da la URL absoluta de una foto (por id) para los productos.
+ * Sin datos inventados.
  */
-export function buildJsonLd(siteUrl: URL, imageUrl?: string, photoUrl?: (id: string) => string) {
+export function buildJsonLd(siteUrl: URL, { imageUrl, collection, services: { services, sheet }, photoUrl }: JsonLdData) {
   const url = siteUrl.href;
   const id = (fragment: string) => `${url}#${fragment}`;
 
   // Cada opción de la colección (un color o una prenda del conjunto) es un producto con su precio y si hay tallas
-  const products = collection.flatMap((piece) =>
+  const products = collection.pieces.flatMap((piece) =>
     piece.options.map((option) => {
-      const available = option.sizes.filter((size) => !option.soldOut?.includes(size));
+      const available = option.sizes.filter((size) => !option.soldOut.includes(size));
       return {
         '@type': 'Product',
         name: productName(piece, option),
-        ...(photoUrl && { image: photoUrl(option.photos[0]) }),
+        image: photoUrl(option.photos[0]),
         brand: { '@id': id('business') },
         ...(available.length > 0 && { size: available.join(', ') }),
         offers: {
@@ -43,7 +50,7 @@ export function buildJsonLd(siteUrl: URL, imageUrl?: string, photoUrl?: (id: str
     }),
   );
 
-  const priced = priceList.flatMap((group) =>
+  const priced = sheet.groups.flatMap((group) =>
     group.items.map((item) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: `${group.group}: ${item.label}` },
@@ -93,7 +100,7 @@ export function buildJsonLd(siteUrl: URL, imageUrl?: string, photoUrl?: (id: str
             {
               '@type': 'Offer',
               itemOffered: { '@type': 'Service', name: 'Arreglo express (cargo adicional)' },
-              price: expressSurcharge,
+              price: sheet.express,
               priceCurrency: 'MXN',
             },
           ],
@@ -102,7 +109,7 @@ export function buildJsonLd(siteUrl: URL, imageUrl?: string, photoUrl?: (id: str
       {
         '@type': 'ItemList',
         '@id': id('coleccion'),
-        name: collectionTitle,
+        name: collection.title,
         itemListElement: products.map((item, index) => ({ '@type': 'ListItem', position: index + 1, item })),
       },
     ],

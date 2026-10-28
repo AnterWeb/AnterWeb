@@ -22,7 +22,7 @@ board   (inclinación con el cursor + entrada con scroll)
     └── paper   ShaderMaterial: ondulación, curvatura lejos de la chinche y hendidura bajo el cursor
 ```
 
-- **Textura:** se dibuja en canvas 2D desde `services.ts` (`flyerTexture.ts`), así que los precios nunca divergen de la UI. `PIN_X`/`PIN_Y` ubican la perforación.
+- **Textura:** se dibuja en canvas 2D con la hoja de precios del panel, que llega en `data-sheet` (`flyerTexture.ts`), así que los precios nunca divergen de la UI. `PIN_X`/`PIN_Y` ubican la perforación.
 - **Luz:** `RoomEnvironment` (PMREM) para los reflejos de la chinche, más luz hemisférica y direccional. El papel no usa luces de three: su shader sombrea con la normal real de la superficie deformada.
 - **Tone mapping:** `NeutralToneMapping`, que solo afecta a la chinche.
 - **Sin recortes:** el canvas sangra fuera de su caja (`BLEED_X`/`BLEED_Y` en `priceFlyer.ts` = `inset` negativo en el CSS) y tiene `pointer-events: none`. Los eventos los escucha la caja.

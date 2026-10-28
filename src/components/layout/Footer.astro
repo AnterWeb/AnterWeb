@@ -49,6 +49,7 @@ const clips = await Promise.all(
   <p class="footer__legal wrap">
     <span>© {year} {site.name}</span>
     <span>Hecho a mano en {site.city}</span>
+    <a class="footer__credit" href="https://flouvia.com" target="_blank" rel="noopener">Sitio por Flouvia</a>
   </p>
 </footer>
 
@@ -219,6 +220,15 @@ const clips = await Promise.all(
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--tinta-soft);
+  }
+
+  /* Crédito del estudio: discreto, en la línea legal; se marca en terracota solo al pasar */
+  .footer__credit {
+    transition: color 0.4s var(--ease-out);
+  }
+
+  .footer__credit:hover {
+    color: var(--terracota);
   }
 
   @media (max-width: 760px) {

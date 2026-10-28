@@ -1,13 +1,21 @@
 ---
 // Flyer de precios en WebGL (scripts/webgl/priceFlyer.ts) con la lista HTML como respaldo.
 // La lista sigue en el DOM para lectores de pantalla y buscadores; si hay WebGL se oculta visualmente.
+// La hoja (del panel) viaja al script en data-sheet para dibujar la textura con los mismos precios.
 import PriceList from './PriceList.astro';
+import type { PriceSheet } from '../../data/cms';
+
+interface Props {
+  sheet: PriceSheet;
+}
+
+const { sheet } = Astro.props;
 ---
 
-<div class="flyer" data-flyer>
+<div class="flyer" data-flyer data-sheet={JSON.stringify(sheet)}>
   <div class="flyer__stage" aria-hidden="true" data-flyer-stage></div>
   <div class="flyer__fallback">
-    <PriceList />
+    <PriceList sheet={sheet} />
   </div>
 </div>
 
@@ -69,7 +77,7 @@ import PriceList from './PriceList.astro';
 
         flyer.classList.add('is-webgl');
         try {
-          await initPriceFlyer(stage);
+          await initPriceFlyer(stage, JSON.parse(flyer.dataset.sheet!));
         } catch (error) {
           flyer.classList.remove('is-webgl');
           console.error('[flyer] WebGL no disponible', error);

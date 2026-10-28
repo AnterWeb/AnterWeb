@@ -1,18 +1,17 @@
 ---
 // Proceso: los pasos del taller con fotos del photoshoot. Continúa a Esencia, por eso no lleva
 // número propio en el ticker. Columnas escalonadas (broken grid) con línea fina; sin números (pedido de la clienta).
-// Datos en src/data/process.ts.
+// Título, pasos y fotos se editan en el panel (Proceso).
 import { Image } from 'astro:assets';
 import SectionHeading from '../ui/SectionHeading.astro';
-import { processSteps } from '../../data/process';
-import { byId } from '../../data/work';
+import { getProcess } from '../../data/cms';
 
-const steps = processSteps.map((step) => ({ ...step, photo: byId(step.photo) }));
+const { title, steps } = await getProcess();
 ---
 
 <section class="process" id="proceso" aria-labelledby="proceso-title">
   <div class="wrap">
-    <SectionHeading label="Proceso" title="Así nace cada pieza." id="proceso-title" />
+    <SectionHeading label="Proceso" title={title} id="proceso-title" />
 
     <ol class="process__steps">
       {steps.map((step) => (

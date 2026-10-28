@@ -1,0 +1,41 @@
+{
+  "titulo": "Así nace cada pieza.",
+  "pasos": [
+    {
+      "titulo": "Diseño",
+      "texto": "Definimos la prenda que deseas, creando un diseño completamente personalizado.",
+      "foto": {
+        "imagen": "/src/assets/cms/proceso/pasos/0/foto/imagen.jpg",
+        "descripcion": "Mano dibujando el boceto de un vestido en un cuaderno",
+        "encuadre": "izquierda"
+      }
+    },
+    {
+      "titulo": "Patrón",
+      "texto": "Antes de cortar la tela, creamos el patrón con tus medidas exactas y una prueba en manta para un mejor ajuste.",
+      "foto": {
+        "imagen": "/src/assets/cms/proceso/pasos/1/foto/imagen.jpg",
+        "descripcion": "Patrón de papel con anotaciones, cinta métrica y lápiz",
+        "encuadre": "centro"
+      }
+    },
+    {
+      "titulo": "Prueba",
+      "texto": "Dependiendo del diseño, coordinamos citas de prueba en las que se perfeccionará cada detalle de tu prenda.",
+      "foto": {
+        "imagen": "/src/assets/cms/proceso/pasos/2/foto/imagen.jpg",
+        "descripcion": "La diseñadora ajusta un vestido negro strapless con una rosa de satín sobre un maniquí",
+        "encuadre": "centro"
+      }
+    },
+    {
+      "titulo": "Costura",
+      "texto": "Cosemos y terminamos cada pieza en el taller hasta que quede lista para ti.",
+      "foto": {
+        "imagen": "/src/assets/cms/proceso/pasos/3/foto/imagen.jpg",
+        "descripcion": "Máquina de coser industrial con hilo rosa y unas tijeras sobre la mesa",
+        "encuadre": "centro"
+      }
+    }
+  ]
+}

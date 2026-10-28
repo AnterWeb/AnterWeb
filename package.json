@@ -16,9 +16,12 @@
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",
+    "@astrojs/vercel": "^11.0.17",
     "@fontsource-variable/jost": "^5.3.0",
     "@fontsource/italiana": "^5.3.0",
     "@gsap/react": "^2.1.2",
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.3.7",

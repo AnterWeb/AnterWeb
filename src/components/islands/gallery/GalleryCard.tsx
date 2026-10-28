@@ -77,7 +77,7 @@ export default function GalleryCard({ item, index, onOpen }: Props) {
           onPointerLeave={onPointerLeave}
         >
           {item.photos.map((photo, i) => {
-            const focus = option?.focus ?? photo.focus;
+            const focus = option?.focus[i] ?? photo.focus;
             return (
               <img
                 key={photo.src}

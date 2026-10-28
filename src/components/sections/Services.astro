@@ -1,10 +1,12 @@
 ---
 // 04 — Servicios. Filas tipo índice (como el hero) + flyer de precios en WebGL.
-// Datos en src/data/services.ts.
+// Servicios y precios se editan en el panel (Servicios y precios).
 import SectionHeading from '../ui/SectionHeading.astro';
 import ArrowCircle from '../ui/ArrowCircle.astro';
 import PriceFlyer from '../blocks/PriceFlyer.astro';
-import { services } from '../../data/services';
+import { getServices } from '../../data/cms';
+
+const { services, sheet } = await getServices();
 ---
 
 <section class="services" id="servicios" aria-labelledby="servicios-title" data-section="04" data-section-label="Servicios">
@@ -14,9 +16,9 @@ import { services } from '../../data/services';
       <h2 id="servicios-title" class="sr-only">Servicios</h2>
 
       <ol class="services__list">
-        {services.map((row) => (
+        {services.map((row, i) => (
           <li class="services__row" data-reveal>
-            <span class="services__n">{row.n}</span>
+            <span class="services__n">{String(i + 1).padStart(2, '0')}</span>
             <div class="services__copy">
               <h3 class="services__title">{row.title}</h3>
               <p class="services__body">{row.body}</p>
@@ -28,7 +30,7 @@ import { services } from '../../data/services';
     </div>
 
     <div class="services__aside">
-      <PriceFlyer />
+      <PriceFlyer sheet={sheet} />
     </div>
   </div>
 </section>

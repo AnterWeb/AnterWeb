@@ -1,7 +1,7 @@
 // Imagen para compartir (Open Graph, 1200×630): una portada de revista con las fotos, colores y tipografías
 // del sitio. Se dibuja como HTML y se captura con Chrome sin ventana a 2x; luego se reduce a 1200×630 para que
 // la letra quede nítida. Resultado: src/assets/og/portada.jpg, que usa components/seo/Seo.astro.
-// La temporada sale de data/collection.ts y los colores de styles/global.css: al cambiar la colección,
+// La temporada sale del panel (src/content/coleccion.json) y los colores de styles/global.css: al cambiar la temporada,
 // basta con volver a correr `npm run og` (en la Mac; en otro sistema, CHROME=ruta npm run og).
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -10,7 +10,6 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { WORDMARK_HEIGHT, WORDMARK_WIDTH, wordmarkGlyphs } from '../src/data/wordmark.ts';
-import { collectionTitle } from '../src/data/collection.ts';
 
 const CHROME = process.env.CHROME ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const root = resolve(import.meta.dirname, '..');
@@ -22,9 +21,10 @@ const css = readFileSync(join(root, 'src/styles/global.css'), 'utf8');
 const token = (name) => css.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, 'i'))[1];
 const [fondo, tinta, terracota] = ['hueso', 'tinta', 'terracota'].map(token);
 
-// "Colección Otoño/Invierno 2026" → "Colección" + "Otoño/Invierno" + "2026"
-const [label, ...rest] = collectionTitle.split(' ');
-const season = rest.join(' ').replace(/\s(\d{4})$/, '<br />$1');
+// La temporada sale del panel (src/content/coleccion.json): "Otoño/Invierno 2026" → "Otoño/Invierno" + "2026"
+const { temporada } = JSON.parse(readFileSync(join(root, 'src/content/coleccion.json'), 'utf8'));
+const label = 'Colección';
+const season = temporada.replace(/\s(\d{4})$/, '<br />$1');
 
 const wordmark = `<svg viewBox="0 0 ${WORDMARK_WIDTH} ${WORDMARK_HEIGHT}" fill="currentColor">${wordmarkGlyphs
   .map((glyph) => `<path d="${glyph.d}" />`)

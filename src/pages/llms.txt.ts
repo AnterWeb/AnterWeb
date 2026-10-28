@@ -1,19 +1,19 @@
 // llms.txt: resumen en texto plano para buscadores con IA (ChatGPT, Perplexity, Claude…).
-// Se genera desde los mismos datos que la página para que precios y contacto nunca diverjan.
+// Se genera desde los mismos datos que la página (el panel, data/cms.ts) para que precios y contacto nunca diverjan.
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { expressSurcharge, priceList, priceNote, services } from '../data/services';
 import { defaultDescription } from '../data/seo';
-import { collection, collectionTitle, isSoldOut, productName, type CollectionOption } from '../data/collection';
+import { getCollection, getServices, isSoldOut, productName, type CollectionOption } from '../data/cms';
 import { mxn } from '../data/format';
 
 const pesos = (value: number) => `${mxn(value)} MXN`;
 
 /** Tallas que quedan de una opción de la colección. */
 const available = (option: CollectionOption) =>
-  isSoldOut(option) ? 'agotado' : `tallas ${option.sizes.filter((size) => !option.soldOut?.includes(size)).join(', ')}`;
+  isSoldOut(option) ? 'agotado' : `tallas ${option.sizes.filter((size) => !option.soldOut.includes(size)).join(', ')}`;
 
-export const GET: APIRoute = ({ site: siteUrl }) => {
+export const GET: APIRoute = async ({ site: siteUrl }) => {
+  const [collection, { services, sheet }] = await Promise.all([getCollection(), getServices()]);
   const lines = [
     `# ${site.name}`,
     '',
@@ -23,17 +23,17 @@ export const GET: APIRoute = ({ site: siteUrl }) => {
     ...services.map((s) => `- ${s.title}: ${s.body}`),
     '',
     '## Precios de confección y ajustes',
-    ...priceList.flatMap((group) => [
+    ...sheet.groups.flatMap((group) => [
       `### ${group.group}`,
       ...group.items.map((item) => `- ${item.label}: ${pesos(item.price)}`),
     ]),
-    `- Arreglo express: +${pesos(expressSurcharge)}`,
+    `- Arreglo express: +${pesos(sheet.express)}`,
     '',
-    `${priceNote}`,
+    `${sheet.note}`,
     '',
-    `## Piezas disponibles: ${collectionTitle}`,
+    `## Piezas disponibles: ${collection.title}`,
     'Prendas terminadas a la venta. Para pedir una, escribe por WhatsApp.',
-    ...collection.flatMap((piece) =>
+    ...collection.pieces.flatMap((piece) =>
       piece.options.map((option) => `- ${productName(piece, option)}: ${pesos(option.price)} (${available(option)})`),
     ),
     '',

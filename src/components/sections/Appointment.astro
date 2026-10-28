@@ -1,13 +1,16 @@
 ---
 // 05 — Agenda tu cita. Cierre compacto sin fotos: encabezado, botón directo a WhatsApp y directorio a la izquierda;
 // formulario tipo Typeform a la derecha (isla islands/contact) que arma el mensaje de WhatsApp.
-// Texto de la intro: lo pidió la clienta (2026-10-23).
+// Título e intro se editan en el panel (Textos de la página); el cargo express del formulario sale de la hoja de precios.
 import SectionHeading from '../ui/SectionHeading.astro';
 import Button from '../ui/Button.astro';
 import InstagramIcon from '../ui/icons/InstagramIcon.astro';
 import WhatsAppIcon from '../ui/icons/WhatsAppIcon.astro';
 import ContactForm from '../islands/contact/ContactForm';
 import { site } from '../../data/site';
+import { getServices, getTexts } from '../../data/cms';
+
+const [{ cita }, { sheet }] = await Promise.all([getTexts(), getServices()]);
 
 const directory = [
   { label: 'Taller', value: `${site.area}, ${site.city}` },
@@ -18,8 +21,8 @@ const directory = [
 <section class="appointment" id="cita" aria-labelledby="cita-title" data-section="05" data-section-label="Agenda tu cita">
   <div class="appointment__inner wrap">
     <div class="appointment__head">
-      <SectionHeading label="Agenda tu cita" title="Hablemos de tu próxima pieza." id="cita-title" />
-      <p class="appointment__body" data-reveal>No dudes en contactarnos. Tu próxima cita está a tan solo un clic.</p>
+      <SectionHeading label="Agenda tu cita" title={cita.titulo} id="cita-title" />
+      <p class="appointment__body" data-reveal>{cita.intro}</p>
       <div class="appointment__cta" data-reveal>
         <Button href={site.whatsappUrl} external><WhatsAppIcon size={15} /> Agenda por WhatsApp</Button>
       </div>
@@ -40,7 +43,7 @@ const directory = [
     </div>
 
     <div class="appointment__form" data-reveal>
-      <ContactForm client:visible />
+      <ContactForm client:visible express={sheet.express} />
     </div>
   </div>
 </section>

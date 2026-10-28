@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-28: v0.11 (panel de la clienta)
+
+- **Panel en `/keystatic`** (Keystatic) para que la clienta actualice la página sin tocar el diseño: la colección (prendas, colores con su muestra, fotos, precio, tallas y sold out), los carruseles de Diseños (agregar, quitar y reordenar piezas y fotos), Proceso, servicios con la hoja de precios y los textos de Esencia, Piezas disponibles y Cita. Ver `docs/cms.md`.
+- Con la identidad del sitio: fondo hueso, tinta, acento terracota, Jost e Italiana y la A del logo (`src/cms/admin.css`, página propia `src/cms/AdminPage.astro`). Dos controles a la medida (`src/cms/fields.tsx`): las muestras de color con la paleta de las prendas y las píldoras de talla que pasan de disponible a sold out.
+- El contenido pasó de `data/collection.ts`, `process.ts`, `services.ts`, las piezas de `work.ts` y los textos sueltos de Esencia, Disponibles y Cita a `src/content/*.json`, con sus fotos en `src/assets/cms/`. La página lo lee con `data/cms.ts`. `work.ts` queda con las 13 fotos fijas del sitio.
+- En local guarda en los archivos; en producción se activa al transferir el repo a la cuenta de GitHub de la clienta (`PUBLIC_KEYSTATIC_GITHUB_REPO` y la GitHub App). Mientras, el build de producción sigue 100 % estático.
+- **Footer:** crédito discreto "Sitio por Flouvia" con enlace a flouvia.com en la línea legal.
+
 ## 2026-10-26: v0.10 (cuarta ronda de la clienta)
 
 - **Pantalla de carga:** se quitaron las tijeras 3D y las solapas de papel (`webgl/loaderScene.ts`, `scissors.ts`, `paperFlaps.ts` y sus shaders). Ahora es el clip del cuaderno en blanco y negro al centro, con ANTER debajo; al terminar vuela a la foto B/N del hero y se funde en ella. Three.js vuelve a cargarse solo con el flyer.
@@ -182,5 +190,5 @@
 - Logo vectorial y nombre de la fuente original.
 - Validar la copy y los títulos de las piezas (incluidos los nombres de los modelos de la colección).
 - Decidir con la clienta si el formulario de Cita se queda, se recorta o se quita (hoy convive con el botón directo a WhatsApp).
-- Marcar en `data/collection.ts` las tallas que se vendan (por ejemplo, después del open house).
+- Activar el panel en producción al transferir el repo a la clienta (`docs/cms.md`).
 - Si se agrega una FAQ: sumar `FAQPage` al schema.

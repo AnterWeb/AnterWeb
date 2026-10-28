@@ -30,6 +30,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
 import { gsap, ScrollTrigger, motionAllowed } from '../motion/gsap';
 import { FLYER_HEIGHT, FLYER_WIDTH, PIN_X, PIN_Y, createFlyerCanvas } from './flyerTexture';
 import { createPushPin } from './pushPin';
+import type { PriceSheet } from '../../data/cms';
 import paperVert from './shaders/paper.vert.glsl?raw';
 import paperFrag from './shaders/paper.frag.glsl?raw';
 import shadowVert from './shaders/shadow.vert.glsl?raw';
@@ -59,7 +60,7 @@ export function supportsWebGL() {
   }
 }
 
-export async function initPriceFlyer(stage: HTMLElement) {
+export async function initPriceFlyer(stage: HTMLElement, sheet: PriceSheet) {
   const animate = motionAllowed();
 
   // Renderer, escena, cámara, luces (las luces solo afectan a la chinche; el papel usa su shader)
@@ -89,7 +90,7 @@ export async function initPriceFlyer(stage: HTMLElement) {
   const pinPos = new Vector2((PIN_X / FLYER_WIDTH - 0.5) * width, (0.5 - PIN_Y / FLYER_HEIGHT) * height);
 
   // Papel
-  const texture = new CanvasTexture(await createFlyerCanvas());
+  const texture = new CanvasTexture(await createFlyerCanvas(sheet));
   texture.colorSpace = SRGBColorSpace;
   texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 

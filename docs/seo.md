@@ -22,15 +22,15 @@ Hasta el 2026-10-23 el valor por defecto era `anter-house.vercel.app`, que no ex
 
 La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una portada de revista hecha con el sitio, sobre el fondo hueso: ANTER a todo lo ancho como cabecera, el satín drapeado (`proceso-manos`) subiendo detrás de sus letras, "HOUSE" y "bespoke fashion" a los lados, la colección como titular en Italiana y la diseñadora en blanco y negro con "Hecho a tu medida, puntada a puntada." en vertical.
 
-- `scripts/og-image.mjs` la dibuja como HTML con las fuentes de Fontsource, los tokens de `global.css`, el wordmark de `data/wordmark.ts` y la temporada de `data/collection.ts`; la captura con Chrome sin ventana a 2x y la guarda reducida en `src/assets/og/portada.jpg`.
+- `scripts/og-image.mjs` la dibuja como HTML con las fuentes de Fontsource, los tokens de `global.css`, el wordmark de `data/wordmark.ts` y la temporada del panel (`src/content/coleccion.json`); la captura con Chrome sin ventana a 2x y la guarda reducida en `src/assets/og/portada.jpg`.
 - Al cambiar de temporada o de fotos: `npm run og` (en la Mac; en otro sistema, `CHROME=ruta npm run og`) y commit de la imagen.
 - WhatsApp a veces recorta la vista previa al centro en cuadrado: ahí quedan la foto principal y el centro de la cabecera.
 
 ## JSON-LD (`data/seo.ts → buildJsonLd`)
 
 - `@graph` con `WebSite`, `ClothingStore` y un `ItemList` con la colección a la venta. No existe un tipo "Dressmaker"; `ClothingStore` es el más cercano.
-- La colección (`data/collection.ts`): cada opción es un `Product` con su nombre de venta (`productName`: "Vestido halter negro"), foto, tallas disponibles y un `Offer` con precio en MXN, `InStock` o `SoldOut` y `NewCondition`. Al marcar tallas vendidas, el schema cambia solo.
-- Lleva `hasOfferCatalog` con los servicios y **cada precio de `priceList`**, generados desde `services.ts`, así que coinciden con lo visible.
+- La colección (del panel, `data/cms.ts`): cada opción es un `Product` con su nombre de venta (`productName`: "Vestido halter negro"), foto, tallas disponibles y un `Offer` con precio en MXN, `InStock` o `SoldOut` y `NewCondition`. Al marcar tallas vendidas, el schema cambia solo.
+- Lleva `hasOfferCatalog` con los servicios y **cada precio de la hoja**, generados desde el panel (Servicios y precios), así que coinciden con lo visible.
 - Se omiten a propósito, porque no los tenemos: `streetAddress`, `postalCode`, `geo`, `openingHoursSpecification`, `priceRange` y `aggregateRating`. No inventarlos.
 - Validar con Rich Results Test y validator.schema.org después de cada cambio.
 
@@ -45,7 +45,7 @@ La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una porta
 ## Contenido on-page
 
 - Los precios están en HTML real (`PriceList`), aunque visualmente se muestre el WebGL.
-- Alt descriptivo en cada pieza (`data/work.ts`).
+- Alt descriptivo en cada foto (el campo "Qué se ve en la foto" del panel; las fijas, en `data/work.ts`).
 - El nombre, teléfono y zona son los mismos en el footer, el schema y `llms.txt`.
 
 ## Pendiente con la clienta
