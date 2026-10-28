@@ -32,7 +32,7 @@ Contacto (WhatsApp, Instagram, zona: `data/site.ts`), preguntas del formulario (
 
 ## Demostración en línea (mientras no hay GitHub)
 
-Para que la clienta conozca el panel antes de la transferencia, se publica con `KEYSTATIC_DEMO=1` (por ejemplo, `vercel deploy --prod --build-env KEYSTATIC_DEMO=1`). Así el build suma el adaptador de Vercel y la función del panel lleva el contenido y sus fotos (`includeFiles`), para que `/keystatic` se pueda recorrer completo. Guardar no escribe nada: `src/cms/api.ts` responde con un aviso (en Vercel el disco es de solo lectura) y el panel muestra una píldora que lo explica. Al activar el modo GitHub se quita `KEYSTATIC_DEMO`.
+Para que la clienta conozca el panel antes de la transferencia, se publica con `KEYSTATIC_DEMO=1` (por ejemplo, `vercel deploy --prod --build-env KEYSTATIC_DEMO=1`). Así el build suma el adaptador de Vercel y la función del panel lleva el contenido y sus fotos (`includeFiles`), para que `/keystatic` se pueda recorrer completo. Guardar no escribe nada: `src/cms/api.ts` responde con un aviso (en Vercel el disco es de solo lectura) y el panel muestra una píldora que lo explica. La lista de archivos de la API solo enseña el contenido del panel, no los archivos internos de la función. `/keystatic` no está enlazado ni en el sitemap y lleva `noindex`; todo lo que muestra ya es público en la página. Al activar el modo GitHub se quita `KEYSTATIC_DEMO`.
 
 ## Activarlo en producción (al transferir el proyecto)
 
