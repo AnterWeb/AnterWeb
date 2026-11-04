@@ -28,10 +28,10 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 
 ## Despliegue
 
-- Todo es de la clienta desde el 2026-11-04: el repo `AnterWeb/AnterWeb` (su cuenta personal de GitHub, público; Flouvia entra como colaboradora con `Flouviamx`) y su proyecto de Vercel, que lo importa y publica en `anter-web.vercel.app`. Un push a `main` despliega ahí (y, ya activo, cada guardado del panel). El repo y el proyecto anteriores de Flouvia (`Flouviamx/alter` y `alter`, en `alter-psi-two.vercel.app`) se retiran.
+- Todo es de la clienta desde el 2026-11-04: el repo `AnterWeb/AnterWeb` (su cuenta personal de GitHub, público; Flouvia entra como colaboradora con `Flouviamx`) y su proyecto de Vercel, que lo importa y publica en `anter-web.vercel.app`. Un push a `main` despliega ahí, igual que cada guardado del panel (activo desde el 2026-11-04, [`docs/cms.md`](./docs/cms.md#en-producción-activo-desde-el-2026-11-04)). El repo y el proyecto anteriores de Flouvia (`Flouviamx/alter` y `alter`, en `alter-psi-two.vercel.app`) se retiran.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
 - Flouvia no publica con la CLI: el proyecto de Vercel es de la clienta y se publica solo desde el repo. `.vercelignore` evita subir `dist/` si alguna vez se usa.
-- Pendiente: activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)) y, cuando compren el dominio, conectarlo en su Vercel como principal, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)).
+- Pendiente, cuando compren el dominio: conectarlo en su Vercel como principal, agregar su callback a la GitHub App del panel ([`docs/cms.md`](./docs/cms.md#en-producción-activo-desde-el-2026-11-04)), alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)).
 
 ## Arquitectura en una mirada
 

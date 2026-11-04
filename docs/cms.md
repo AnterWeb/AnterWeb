@@ -28,21 +28,19 @@ Contacto (WhatsApp, Instagram, zona: `data/site.ts`), preguntas del formulario (
 
 ## En local
 
-`npm run dev` y abrir `http://localhost:4322/keystatic`. Sin `PUBLIC_KEYSTATIC_GITHUB_REPO`, el panel guarda en los archivos del proyecto; esos cambios se suben con un commit como cualquier otro.
+`npm run dev` y abrir `http://localhost:4322/keystatic`. Con `PUBLIC_KEYSTATIC_GITHUB_REPO` en `.env` (como quedó tras crear la GitHub App), el panel local también guarda en el repo de la clienta: cada guardado es un commit a `main` y se publica. Para probar sin publicar, comentar esa línea del `.env`: el panel guarda en los archivos del proyecto y esos cambios se suben con un commit como cualquier otro.
 
 ## Demostración en línea (mientras no hay GitHub)
 
 Para que la clienta conozca el panel antes de la transferencia, se publica con `KEYSTATIC_DEMO=1` (por ejemplo, `vercel deploy --prod --build-env KEYSTATIC_DEMO=1`). Así el build suma el adaptador de Vercel y la función del panel lleva el contenido y sus fotos (`includeFiles`), para que `/keystatic` se pueda recorrer completo. Guardar no escribe nada: `src/cms/api.ts` responde con un aviso (en Vercel el disco es de solo lectura) y el panel muestra una píldora que lo explica. La lista de archivos de la API solo enseña el contenido del panel, no los archivos internos de la función. `/keystatic` no está enlazado ni en el sitemap y lleva `noindex`; todo lo que muestra ya es público en la página. Al activar el modo GitHub se quita `KEYSTATIC_DEMO`.
 
-## Activarlo en producción (al transferir el proyecto)
+## En producción (activo desde el 2026-11-04)
 
-Sin `PUBLIC_KEYSTATIC_GITHUB_REPO` el build de producción no incluye el panel y el sitio es 100 % estático. Para activarlo:
+La clienta entra en `https://anter-web.vercel.app/keystatic` (o en su dominio, cuando lo conecte) con su cuenta de GitHub, `AnterWeb`. Lo que guarda es un commit a `main` de `AnterWeb/AnterWeb`, y su Vercel publica en uno o dos minutos.
 
-1. Repo y Vercel ya son de la clienta (`AnterWeb/AnterWeb`, publicado en `anter-web.vercel.app` desde el 2026-11-04).
-2. En local, poner `PUBLIC_KEYSTATIC_GITHUB_REPO=AnterWeb/AnterWeb` en `.env`, correr `npm run dev` y abrir `/keystatic`. Keystatic guía la creación de la GitHub App y escribe en `.env` `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. `AnterWeb` es una cuenta personal y no una organización: un colaborador no puede crear ni instalar la app ahí, así que ese paso se hace con su sesión de GitHub (en llamada con ella).
-3. En la configuración de esa GitHub App, agregar la URL de callback de producción: `https://<dominio>/api/keystatic/github/oauth/callback`.
-4. Subir las cinco variables a Vercel (Production) y volver a publicar. Con ellas, el build suma el adaptador de Vercel y las rutas del panel corren en servidor; el resto de la página sigue prerenderizada.
-5. La clienta entra en `https://<dominio>/keystatic` con su cuenta de GitHub.
+- **GitHub App:** `anterweb-keystatic`, de la cuenta `AnterWeb` e instalada solo en el repo `AnterWeb`. Se creó con el asistente de Keystatic (`/keystatic/setup`), que solo funciona en local porque escribe las llaves en `.env`.
+- **Variables** (en el Vercel de la clienta, los tres entornos): `PUBLIC_KEYSTATIC_GITHUB_REPO`, `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. Con ellas el build suma el adaptador de Vercel y las rutas del panel corren en servidor; el resto de la página sigue prerenderizada. Sin `PUBLIC_KEYSTATIC_GITHUB_REPO` el sitio vuelve a ser 100 % estático. Los valores viven en su Vercel y en el `.env` local; nunca en el repo ni en un chat.
+- **Al conectar su dominio:** en la GitHub App (GitHub → Settings → Developer settings → GitHub Apps → anterweb-keystatic → General), agregar la URL de callback `https://<dominio>/api/keystatic/github/oauth/callback` (sin quitar la de `anter-web.vercel.app`) y cambiar la Homepage URL. Lo hace la dueña de la app, con la sesión de `AnterWeb`.
 
 ## Después de cambiar el esquema
 
