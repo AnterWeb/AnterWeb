@@ -28,10 +28,11 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 
 ## Despliegue
 
-- Repo `Flouviamx/alter`. Un push a `main` despliega en Vercel; hoy la clienta ve `alter-psi-two.vercel.app`.
+- Repo de la clienta: `AnterWeb/AnterWeb` (su cuenta personal, público; Flouvia entra como colaboradora con `Flouviamx`). Desde el 2026-11-03 es el `origin`; el repo anterior de Flouvia (`Flouviamx/alter`, remoto `flouvia`) se borra cuando su proyecto de Vercel esté arriba.
+- Mientras tanto, la vista previa sigue en el proyecto `alter` del equipo `flouvia` (`alter-psi-two.vercel.app`), que no está conectado a este repo: un push a `main` todavía no publica nada. Cuando su proyecto de Vercel importe el repo, cada push a `main` (y cada guardado del panel) publicará solo.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
 - Sin GitHub (por ejemplo, si falla el acceso al repo), se publica directo con la CLI al proyecto `alter` del equipo `flouvia` (`.vercelignore` evita subir `dist/`). Si Vercel bloquea el deploy porque el correo del commit no corresponde a una cuenta de GitHub, se publica desde una copia sin `.git`: `git archive HEAD | tar -x -C <carpeta>`, se copia `.vercel/project.json` y ahí `vercel deploy --prod --archive=tgz`. Después se sube el commit a `main` para que el repo y producción coincidan.
-- Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)); transferir el repo a la cuenta de GitHub de la clienta y activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)).
+- Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)); crear el proyecto en el Vercel de la clienta conectado a su repo y activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)).
 
 ## Arquitectura en una mirada
 
