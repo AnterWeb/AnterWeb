@@ -38,7 +38,7 @@ Para que la clienta conozca el panel antes de la transferencia, se publica con `
 
 Sin `PUBLIC_KEYSTATIC_GITHUB_REPO` el build de producción no incluye el panel y el sitio es 100 % estático. Para activarlo:
 
-1. El repo ya es de la clienta (`AnterWeb/AnterWeb`, desde el 2026-11-03). Falta crear su proyecto de Vercel importando ese repo.
+1. Repo y Vercel ya son de la clienta (`AnterWeb/AnterWeb`, publicado en `anter-web.vercel.app` desde el 2026-11-04).
 2. En local, poner `PUBLIC_KEYSTATIC_GITHUB_REPO=AnterWeb/AnterWeb` en `.env`, correr `npm run dev` y abrir `/keystatic`. Keystatic guía la creación de la GitHub App y escribe en `.env` `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` y `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. `AnterWeb` es una cuenta personal y no una organización: un colaborador no puede crear ni instalar la app ahí, así que ese paso se hace con su sesión de GitHub (en llamada con ella).
 3. En la configuración de esa GitHub App, agregar la URL de callback de producción: `https://<dominio>/api/keystatic/github/oauth/callback`.
 4. Subir las cinco variables a Vercel (Production) y volver a publicar. Con ellas, el build suma el adaptador de Vercel y las rutas del panel corren en servidor; el resto de la página sigue prerenderizada.

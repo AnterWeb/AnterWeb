@@ -8,9 +8,9 @@ import vercel from '@astrojs/vercel';
 
 // Dominio de producción: fuente única para canonical, Open Graph, sitemap, robots y JSON-LD.
 // En Vercel sale solo de VERCEL_PROJECT_PRODUCTION_URL (el dominio principal del proyecto: hoy
-// alter-psi-two.vercel.app; cuando se conecte el dominio de la clienta, ese). SITE_URL lo fuerza a mano.
+// anter-web.vercel.app, el proyecto de la clienta; cuando se conecte el dominio de la clienta, ese). SITE_URL lo fuerza a mano.
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-const SITE_URL = process.env.SITE_URL ?? (productionHost ? `https://${productionHost}` : 'https://alter-psi-two.vercel.app');
+const SITE_URL = process.env.SITE_URL ?? (productionHost ? `https://${productionHost}` : 'https://anter-web.vercel.app');
 
 // Panel de la clienta (Keystatic, docs/cms.md): en local siempre; en producción cuando ya hay repo de GitHub
 // conectado (PUBLIC_KEYSTATIC_GITHUB_REPO) o como demostración de solo lectura (KEYSTATIC_DEMO=1).

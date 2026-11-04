@@ -28,11 +28,10 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 
 ## Despliegue
 
-- Repo de la clienta: `AnterWeb/AnterWeb` (su cuenta personal, público; Flouvia entra como colaboradora con `Flouviamx`). Desde el 2026-11-03 es el `origin`; el repo anterior de Flouvia (`Flouviamx/alter`, remoto `flouvia`) se borra cuando su proyecto de Vercel esté arriba.
-- Mientras tanto, la vista previa sigue en el proyecto `alter` del equipo `flouvia` (`alter-psi-two.vercel.app`), que no está conectado a este repo: un push a `main` todavía no publica nada. Cuando su proyecto de Vercel importe el repo, cada push a `main` (y cada guardado del panel) publicará solo.
+- Todo es de la clienta desde el 2026-11-04: el repo `AnterWeb/AnterWeb` (su cuenta personal de GitHub, público; Flouvia entra como colaboradora con `Flouviamx`) y su proyecto de Vercel, que lo importa y publica en `anter-web.vercel.app`. Un push a `main` despliega ahí (y, ya activo, cada guardado del panel). El repo y el proyecto anteriores de Flouvia (`Flouviamx/alter` y `alter`, en `alter-psi-two.vercel.app`) se retiran.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
-- Sin GitHub (por ejemplo, si falla el acceso al repo), se publica directo con la CLI al proyecto `alter` del equipo `flouvia` (`.vercelignore` evita subir `dist/`). Si Vercel bloquea el deploy porque el correo del commit no corresponde a una cuenta de GitHub, se publica desde una copia sin `.git`: `git archive HEAD | tar -x -C <carpeta>`, se copia `.vercel/project.json` y ahí `vercel deploy --prod --archive=tgz`. Después se sube el commit a `main` para que el repo y producción coincidan.
-- Pendiente para la entrega (cuando compren el dominio): conectarlo en Vercel, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)); crear el proyecto en el Vercel de la clienta conectado a su repo y activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)).
+- Flouvia no publica con la CLI: el proyecto de Vercel es de la clienta y se publica solo desde el repo. `.vercelignore` evita subir `dist/` si alguna vez se usa.
+- Pendiente: activar el panel en producción ([`docs/cms.md`](./docs/cms.md#activarlo-en-producción-al-transferir-el-proyecto)) y, cuando compren el dominio, conectarlo en su Vercel como principal, alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)).
 
 ## Arquitectura en una mirada
 

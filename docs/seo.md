@@ -4,7 +4,7 @@ Basado en las skills `seo-audit`, `schema-markup` y `ai-seo` (`~/Desktop/Claude 
 
 ## Dominio: una sola fuente
 
-`astro.config.mjs` define `site`. En Vercel sale solo de `VERCEL_PROJECT_PRODUCTION_URL`, el dominio principal del proyecto: hoy `alter-psi-two.vercel.app` y, cuando se conecte el dominio de la clienta y quede como principal, ese, sin tocar código. `SITE_URL` lo fuerza a mano (`SITE_URL=https://… npm run build`); fuera de Vercel, el respaldo es `alter-psi-two.vercel.app`. Canonical, `og:url`, `og:image`, el sitemap, robots y el JSON-LD salen de ahí.
+`astro.config.mjs` define `site`. En Vercel sale solo de `VERCEL_PROJECT_PRODUCTION_URL`, el dominio principal del proyecto: hoy `anter-web.vercel.app` y, cuando se conecte el dominio de la clienta y quede como principal, ese, sin tocar código. `SITE_URL` lo fuerza a mano (`SITE_URL=https://… npm run build`); fuera de Vercel, el respaldo es `anter-web.vercel.app`. Canonical, `og:url`, `og:image`, el sitemap, robots y el JSON-LD salen de ahí.
 
 Hasta el 2026-10-23 el valor por defecto era `anter-house.vercel.app`, que no existe (404): el canonical apuntaba a una página inexistente y al compartir el enlace (WhatsApp, Instagram) no salía la imagen.
 
