@@ -3,6 +3,10 @@ import '@fontsource/italiana/400.css';
 import '@fontsource-variable/jost';
 import '../styles/global.css';
 import Seo from '../components/seo/Seo.astro';
+// Estadísticas de Vercel (visitas y velocidad real), sin cookies. Se activan en el proyecto de la clienta;
+// mientras no estén activas, sus scripts no cargan nada. El panel (/keystatic) no usa este layout.
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title?: string;
@@ -43,5 +47,7 @@ const { title, description, noindex } = Astro.props;
       initSmooth();
       initReveals();
     </script>
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>

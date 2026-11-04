@@ -38,7 +38,7 @@ La vista previa al mandar el enlace (WhatsApp, Instagram, iMessage) es una porta
 
 | Ruta | Archivo | Contenido |
 |---|---|---|
-| `/robots.txt` | `robots.txt.ts` | `Allow: /` para todos (incluidos los crawlers de IA) + sitemap absoluto |
+| `/robots.txt` | `robots.txt.ts` | `Allow: /` para todos (incluidos los crawlers de IA), `Disallow` del panel (`/keystatic`) y su API (`/api/`), + sitemap absoluto |
 | `/sitemap.xml` | `sitemap.xml.ts` | Solo URLs canónicas indexables (`/`), con `lastmod` de build. La 404 y las anclas no van |
 | `/llms.txt` | `llms.txt.ts` | Resumen para buscadores con IA: servicios, precios en MXN, la colección con tallas disponibles y contacto, desde los mismos datos |
 

@@ -24,6 +24,8 @@
     "@keystatic/core": "^0.6.9",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.3.7",
     "gsap": "^3.15.0",
     "react": "^19.3.0",

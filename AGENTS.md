@@ -37,7 +37,7 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 
 | Capa | Decisión |
 |---|---|
-| Framework | Astro 7, salida estática |
+| Framework | Astro 7: página prerenderizada; solo el panel corre en servidor (adaptador de Vercel) |
 | UI | Componentes `.astro`; React 19 solo en islas con estado real |
 | Estilos | CSS a mano, scoped por componente, sobre los tokens de `src/styles/global.css` |
 | Movimiento | GSAP 3: ScrollSmoother, ScrollTrigger y `useGSAP` |
@@ -46,6 +46,8 @@ Runtime: Node `>=22.12.0` (ver `.nvmrc`).
 | Imágenes | `astro:assets` (`<Image>` / `getImage`) desde `src/assets/` |
 | Panel de la clienta | Keystatic (`keystatic.config.tsx`, `src/cms/`): contenido en `src/content/*.json`, fotos en `src/assets/cms/`; en producción guarda en el repo de GitHub de la clienta |
 | Idioma | Solo español (`es-MX`) |
+| Headers de seguridad | `vercel.json`: nadie puede meter la página en un iframe (`X-Frame-Options` y `frame-ancestors`), `nosniff`, `Referrer-Policy` y `Permissions-Policy`; el panel y su API van con `no-store` y `noindex`. HSTS lo pone Vercel. La CSP no limita scripts (GSAP y Three corren en línea) |
+| Estadísticas | Vercel Web Analytics y Speed Insights (`@vercel/analytics`, `@vercel/speed-insights` en `Layout.astro`), sin cookies; se activan en el proyecto de Vercel de la clienta. El panel no las carga |
 
 ## Reglas globales
 
