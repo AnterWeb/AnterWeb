@@ -30,10 +30,6 @@ Contacto (WhatsApp, Instagram, zona: `data/site.ts`), preguntas del formulario (
 
 `npm run dev` y abrir `http://localhost:4322/keystatic`. Con `PUBLIC_KEYSTATIC_GITHUB_REPO` en `.env` (como quedó tras crear la GitHub App), el panel local también guarda en el repo de la clienta: cada guardado es un commit a `main` y se publica. Para probar sin publicar, comentar esa línea del `.env`: el panel guarda en los archivos del proyecto y esos cambios se suben con un commit como cualquier otro.
 
-## Demostración en línea (mientras no hay GitHub)
-
-Para que la clienta conozca el panel antes de la transferencia, se publica con `KEYSTATIC_DEMO=1` (por ejemplo, `vercel deploy --prod --build-env KEYSTATIC_DEMO=1`). Así el build suma el adaptador de Vercel y la función del panel lleva el contenido y sus fotos (`includeFiles`), para que `/keystatic` se pueda recorrer completo. Guardar no escribe nada: `src/cms/api.ts` responde con un aviso (en Vercel el disco es de solo lectura) y el panel muestra una píldora que lo explica. La lista de archivos de la API solo enseña el contenido del panel, no los archivos internos de la función. `/keystatic` no está enlazado ni en el sitemap y lleva `noindex`; todo lo que muestra ya es público en la página. Al activar el modo GitHub se quita `KEYSTATIC_DEMO`.
-
 ## En producción (activo desde el 2026-11-04)
 
 La clienta entra en `https://anter-web.vercel.app/keystatic` (o en su dominio, cuando lo conecte) con su cuenta de GitHub, `AnterWeb`. Lo que guarda es un commit a `main` de `AnterWeb/AnterWeb`, y su Vercel publica en uno o dos minutos.

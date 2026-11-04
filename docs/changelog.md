@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-04: v1.0 (entrega a la clienta)
+
+- **Todo es de la clienta:** el código vive en su repo (`AnterWeb/AnterWeb`) y se publica desde su Vercel en `anter-web.vercel.app`. El repo y el proyecto anteriores de Flouvia se retiraron.
+- **Panel en producción** (`/keystatic`): entra con su GitHub y cada guardado es un commit que se publica solo. La GitHub App `anterweb-keystatic` es de su cuenta y sus variables viven en su Vercel (`.env.example` las lista sin valores). Se quitó el modo demostración (`KEYSTATIC_DEMO`).
+- **Headers de seguridad** (`vercel.json`): la página no se puede meter en un iframe, `nosniff`, `Referrer-Policy` y `Permissions-Policy`; el panel y su API van con `no-store` y `noindex`. `robots.txt` deja fuera el panel y su API.
+- **Estadísticas:** Vercel Web Analytics y Speed Insights, sin cookies. Se activan en el proyecto de Vercel de la clienta.
+- **Calidad:** pruebas con `node:test` (`npm test`: el contenido del panel y la lógica del formulario), `npm run verify` y CI en GitHub Actions. Tallas, estados y encuadres pasan a `src/cms/values.ts`, la fuente que comparten el panel, la página y las pruebas. Node fijo en 24.
+- **README** para quien llegue al proyecto, con el stack, los scripts, la estructura y cómo se publica.
+- **Pendiente:** el aviso de privacidad (`/privacidad`, en la rama `aviso-privacidad`) espera el nombre legal y el domicilio de la clienta; cuando compre su dominio, conectarlo y agregar su callback a la GitHub App (`docs/cms.md`).
+
 ## 2026-10-28: v0.11 (panel de la clienta)
 
 - **Panel en `/keystatic`** (Keystatic) para que la clienta actualice la página sin tocar el diseño: la colección (prendas, colores con su muestra, fotos, precio, tallas y sold out), los carruseles de Diseños (agregar, quitar y reordenar piezas y fotos), Proceso, servicios con la hoja de precios y los textos de Esencia, Piezas disponibles y Cita. Ver `docs/cms.md`.

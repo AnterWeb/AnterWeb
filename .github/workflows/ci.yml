@@ -1,0 +1,32 @@
+# Revisión de cada push a main y de cada pull request: tipos, pruebas y build.
+# Vercel publica por su lado; esto avisa en GitHub si algo se rompió (una palomita o una cruz en el commit).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      # Igual que en producción: el build incluye el panel (sus llaves solo hacen falta en tiempo de ejecución)
+      PUBLIC_KEYSTATIC_GITHUB_REPO: AnterWeb/AnterWeb
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build

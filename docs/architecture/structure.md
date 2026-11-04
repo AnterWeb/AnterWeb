@@ -4,11 +4,14 @@
 
 | Paquete | Uso |
 |---|---|
-| `astro` 7 | Framework, salida estática |
+| `astro` 7 | Framework: página prerenderizada; solo el panel corre en servidor |
 | `@astrojs/react`, `react` 19 | Isla de la galería |
 | `gsap` 3 + `@gsap/react` | ScrollSmoother, ScrollTrigger, `useGSAP` |
 | `three` r186 | Flyer de precios en WebGL (import dinámico) |
 | `@fontsource/italiana`, `@fontsource-variable/jost` | Fuentes self-hosted |
+| `@keystatic/core`, `@keystatic/astro` | Panel de la clienta (`/keystatic`) |
+| `@astrojs/vercel` | Adaptador para las rutas del panel (solo cuando el panel va en el build) |
+| `@vercel/analytics`, `@vercel/speed-insights` | Estadísticas sin cookies (en `Layout.astro`) |
 | `@astrojs/check`, `typescript`, `@types/*` | `npm run check` |
 
 ## Carpetas
@@ -28,7 +31,7 @@ src/
 │   └── islands/
 │       ├── gallery/          DesignGallery, GalleryRow, GalleryCard, PieceOptions (colores, precio y tallas), Lightbox, transitions (Flip), types, groups (solo servidor), gallery.css
 │       └── contact/          ContactForm, StepText, StepChoice, StepSummary, StepHeader, FormProgress, message, contact.css
-├── cms/                      panel de la clienta: AdminPage.astro, admin.tsx, admin.css, fields.tsx (color y tallas)
+├── cms/                      panel de la clienta: AdminPage.astro, admin.tsx, admin.css, api.ts, fields.tsx (color y tallas), values.ts (tallas, estados y encuadres)
 ├── content/                  contenido del panel: coleccion, disenos, proceso, servicios, textos (.json)
 ├── assets/cms/               fotos del panel (las nombra Keystatic; no se tocan a mano)
 ├── data/                     cms.ts (lee el panel), site.ts, work.ts (fotos fijas), films.ts, seo.ts, contactForm.ts, wordmark.ts, format.ts
@@ -39,6 +42,11 @@ src/
 │   ├── motion/               gsap, smooth, reveal, hero, pointerDepth, footer, films, loader
 │   └── webgl/                priceFlyer, pushPin, flyerTexture, satin (WebGL puro), shaders/*.glsl
 └── styles/global.css         tokens, reset, utilidades, estados iniciales de animación
+keystatic.config.tsx          esquema del panel
+tests/                        pruebas con node:test: contenido del panel (content.test.ts) y formulario (contact.test.ts)
+.github/workflows/ci.yml      CI: check, pruebas y build en cada push a main y cada pull request
+vercel.json                   headers de seguridad (todo el sitio; el panel con no-store y noindex)
+.env.example                  variables del panel en modo GitHub (los valores viven en Vercel y en .env local)
 scripts/og-image.mjs          genera la imagen para compartir con Chrome sin ventana (npm run og)
 scripts/favicon.mjs           genera favicon.svg, favicon.ico y apple-touch-icon.png en public/ (npm run favicon)
 ```
@@ -53,3 +61,4 @@ scripts/favicon.mjs           genera favicon.svg, favicon.ico y apple-touch-icon
 - **Imágenes** siempre desde `src/assets/`: `<Image>` con `widths` y `sizes`, o `getImage()` para pasarlas a una isla o a OG.
 - **Datos**: lo editable sale del panel con `data/cms.ts` (`getCollection`, `getDesigns`, `getProcess`, `getServices`, `getTexts`); las fotos fijas se piden por id con `byId('novia-salon')`. Ver `docs/cms.md` y `docs/content/portfolio.md`.
 - `keystatic.config.tsx` (raíz) es el esquema del panel; la integración `cms()` de `astro.config.mjs` lo monta en `/keystatic` en local y, en producción, solo con `PUBLIC_KEYSTATIC_GITHUB_REPO`.
+- **Pruebas:** `tests/*.test.ts` corren con `node --test` y la eliminación de tipos de Node 24, sin compilar ni dependencias. Importan módulos sin dependencias (`cms/values.ts`, `data/contactForm.ts`, `data/format.ts`) con su extensión `.ts`. Lo que depende de Astro (`astro:assets`, `import.meta.glob`) se cubre con el build.

@@ -4,12 +4,7 @@
 // Sus estilos viven en src/cms/admin.css.
 import { useId, useRef } from 'react';
 import type { BasicFormField } from '@keystatic/core';
-
-export const SIZES = ['CH', 'M', 'G', 'EG'] as const;
-export type Size = (typeof SIZES)[number];
-export type SizeState = 'disponible' | 'agotada';
-/** Talla → estado; una talla que no aparece no se hace en esa prenda */
-export type SizesValue = Partial<Record<Size, SizeState>>;
+import { SIZES, type SizeState, type SizesValue } from './values';
 
 /** Colores de prenda frecuentes: los de la colección y los básicos de fiesta */
 export const PRESET_COLORS = [

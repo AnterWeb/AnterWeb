@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'node:url';
-import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
@@ -12,23 +12,13 @@ import vercel from '@astrojs/vercel';
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const SITE_URL = process.env.SITE_URL ?? (productionHost ? `https://${productionHost}` : 'https://anter-web.vercel.app');
 
-// Panel de la clienta (Keystatic, docs/cms.md): en local siempre; en producción cuando ya hay repo de GitHub
-// conectado (PUBLIC_KEYSTATIC_GITHUB_REPO) o como demostración de solo lectura (KEYSTATIC_DEMO=1).
-// Sin ninguno de los dos, el sitio sigue siendo 100 % estático.
-const cmsDemo = process.env.KEYSTATIC_DEMO === '1';
-const cmsEnabled = process.argv.includes('dev') || Boolean(process.env.PUBLIC_KEYSTATIC_GITHUB_REPO) || cmsDemo;
-
-/** En la demostración, la función del panel lleva el contenido y sus fotos para poder leerlos */
-const cmsFiles = () =>
-  ['src/content', 'src/assets/cms'].flatMap((dir) =>
-    readdirSync(dir, { recursive: true, withFileTypes: true })
-      .filter((entry) => entry.isFile())
-      .map((entry) => `${entry.parentPath}/${entry.name}`),
-  );
+// Panel de la clienta (Keystatic, docs/cms.md): en local siempre; en producción cuando hay repo de GitHub
+// conectado (PUBLIC_KEYSTATIC_GITHUB_REPO, en el Vercel de la clienta). Sin él, el sitio es 100 % estático.
+const cmsEnabled = process.argv.includes('dev') || Boolean(process.env.PUBLIC_KEYSTATIC_GITHUB_REPO);
 
 /**
  * La integración de Keystatic, con nuestra página del panel (src/cms/AdminPage.astro, con la identidad del sitio)
- * y nuestra API (src/cms/api.ts, que en la demostración no guarda) en lugar de las genéricas.
+ * y su API (src/cms/api.ts) en lugar de las genéricas.
  * El resto es igual a @keystatic/astro: el módulo virtual de la config.
  * @returns {import('astro').AstroIntegration}
  */
@@ -77,9 +67,8 @@ export default defineConfig({
   site: SITE_URL,
   integrations: [react(), ...(cmsEnabled ? [cms()] : [])],
   // Las rutas del panel corren en servidor; el resto de la página sigue prerenderizada
-  ...(cmsEnabled && { adapter: vercel(cmsDemo ? { includeFiles: cmsFiles() } : {}) }),
+  ...(cmsEnabled && { adapter: vercel() }),
   vite: {
-    define: { 'import.meta.env.KEYSTATIC_DEMO_MODE': JSON.stringify(cmsDemo) },
     // Three se importa de forma diferida; pre-optimizarlo evita el "504 Outdated Optimize Dep" en dev.
     optimizeDeps: {
       include: ['three', 'three/examples/jsm/environments/RoomEnvironment.js'],

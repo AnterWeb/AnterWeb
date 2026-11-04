@@ -1,7 +1,6 @@
 ---
 // Página del panel (/keystatic): la app de Keystatic vestida con la identidad del sitio (admin.css).
 // La inyecta la integración de astro.config.mjs en lugar de la página genérica de Keystatic.
-// En la demostración (KEYSTATIC_DEMO) lleva un aviso: se puede recorrer y probar todo, pero no se guarda.
 import '@fontsource/italiana/400.css';
 import '@fontsource-variable/jost';
 import './admin.css';
@@ -22,11 +21,5 @@ export const prerender = false;
   </head>
   <body>
     <Admin client:only="react" />
-    {import.meta.env.KEYSTATIC_DEMO_MODE && (
-      <p class="ah-demo" role="status">
-        <strong>Demostración del panel.</strong> Recorre y prueba todo; aquí los cambios no se guardan. Cuando el sitio pase
-        a tu cuenta, cada cambio se publicará solo en uno o dos minutos.
-      </p>
-    )}
   </body>
 </html>

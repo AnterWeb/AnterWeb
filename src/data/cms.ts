@@ -4,8 +4,8 @@
 // Las fotos fijas del sitio (hero, Esencia, menú, 404) no son editables: siguen en work.ts.
 import type { ImageMetadata } from 'astro';
 import { createReader } from '@keystatic/core/reader';
-import keystaticConfig, { FRAMING } from '../../keystatic.config';
-import { SIZES, type Size } from '../cms/fields';
+import keystaticConfig from '../../keystatic.config';
+import { FRAMING, SIZES, type Size } from '../cms/values';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const assets = import.meta.glob<ImageMetadata>('/src/assets/cms/**/*.{jpg,jpeg,png,webp,avif}', {

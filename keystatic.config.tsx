@@ -9,15 +9,7 @@ import { WORDMARK_HEIGHT, wordmarkGlyphs } from './src/data/wordmark';
 
 const repo = import.meta.env.PUBLIC_KEYSTATIC_GITHUB_REPO as `${string}/${string}` | undefined;
 
-/** Cómo se encuadra una foto en su tarjeta (object-position) */
-export const FRAMING = {
-  centro: '50% 50%',
-  arriba: '50% 20%',
-  abajo: '50% 100%',
-  izquierda: '30% 50%',
-  derecha: '70% 50%',
-} as const;
-
+/** Encuadre de una foto en su tarjeta; cada valor y su object-position viven en src/cms/values.ts (FRAMING) */
 const framing = fields.select({
   label: 'Encuadre en la tarjeta',
   description: 'Qué parte de la foto se ve cuando la tarjeta la recorta.',

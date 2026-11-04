@@ -9,7 +9,7 @@ Este archivo es el **índice**. `CLAUDE.md` es un symlink a este mismo archivo. 
 1. `git fetch` y `git status --short`: trae lo que haya en `main` y conserva cualquier trabajo local ajeno.
 2. Abre el documento de `docs/` que corresponde a la tarea (tabla de abajo).
 3. Verifica la fuente de verdad en código o datos antes de cambiar algo.
-4. Al terminar, registra el cambio en [`docs/changelog.md`](./docs/changelog.md) y haz commit. El push a `main` publica la vista previa que ve la clienta: solo cuando lo pidan.
+4. Al terminar, registra el cambio en [`docs/changelog.md`](./docs/changelog.md), corre `npm run verify` y haz commit. El push a `main` publica en producción (el Vercel de la clienta): solo cuando lo pidan.
 
 ## Comandos
 
@@ -19,18 +19,20 @@ astro dev stop | status | logs       # administrar el servidor en segundo plano
 npm run build                        # build de producción → dist/
 npm run preview                      # preview del build
 npm run check                        # diagnóstico de tipos (Astro + TS)
+npm test                             # pruebas (tests/*.test.ts con node:test, sin dependencias)
+npm run verify                       # check + test + build: lo mismo que corre la CI
 npm run og                           # regenera la imagen para compartir (src/assets/og/portada.jpg)
 npm run favicon                      # regenera el favicon y el ícono del iPhone (public/)
 SITE_URL=https://dominio.mx npm run build   # fuerza el dominio (en Vercel sale solo, ver Despliegue)
 ```
 
-Runtime: Node `>=22.12.0` (ver `.nvmrc`).
+Runtime: Node 24 (`.nvmrc` y `engines` en `package.json`; Vercel usa la misma). Las variables del panel están en `.env.example`.
 
 ## Despliegue
 
 - Todo es de la clienta desde el 2026-11-04: el repo `AnterWeb/AnterWeb` (su cuenta personal de GitHub, público; Flouvia entra como colaboradora con `Flouviamx`) y su proyecto de Vercel, que lo importa y publica en `anter-web.vercel.app`. Un push a `main` despliega ahí, igual que cada guardado del panel (activo desde el 2026-11-04, [`docs/cms.md`](./docs/cms.md#en-producción-activo-desde-el-2026-11-04)). El repo y el proyecto anteriores de Flouvia (`Flouviamx/alter` y `alter`, en `alter-psi-two.vercel.app`) se retiran.
 - El dominio de canonical, Open Graph, sitemap, robots y JSON-LD sale de `VERCEL_PROJECT_PRODUCTION_URL` (`astro.config.mjs`): cuando se conecte el dominio de la clienta como principal en Vercel, todo se ajusta sin tocar código. Nunca escribas el dominio a mano.
-- Flouvia no publica con la CLI: el proyecto de Vercel es de la clienta y se publica solo desde el repo. `.vercelignore` evita subir `dist/` si alguna vez se usa.
+- Flouvia no publica con la CLI: el proyecto de Vercel es de la clienta y se publica solo desde el repo. La CI (`.github/workflows/ci.yml`) corre `check`, pruebas y build en cada push a `main` y en cada pull request; si un build de Vercel falla, la versión anterior sigue en línea.
 - Pendiente, cuando compren el dominio: conectarlo en su Vercel como principal, agregar su callback a la GitHub App del panel ([`docs/cms.md`](./docs/cms.md#en-producción-activo-desde-el-2026-11-04)), alta en Search Console con el sitemap y perfil de Google Business ([`docs/seo.md`](./docs/seo.md)).
 
 ## Arquitectura en una mirada
@@ -122,11 +124,13 @@ Las imágenes de referencia de la clienta (logo, flyer, moodboard, boceto) está
 ## Validación mínima
 
 - Cambios de UI: revisar desktop (1440) y móvil (390), y con reduced motion activado.
-- Cambios de datos, rutas o SEO: `npm run check` y `npm run build`; revisar `dist/robots.txt`, `dist/sitemap.xml` y el JSON-LD.
+- Siempre: `npm run verify` (tipos, pruebas y build) en verde.
+- Cambios de datos, rutas o SEO: revisar `dist/robots.txt`, `dist/sitemap.xml` y el JSON-LD.
+- Cambios en el esquema del panel o en `src/content/`: `npm test` valida fotos, tallas, colores y precios; si cambia una regla del esquema, se actualiza `src/cms/values.ts` y la prueba.
 - Cambios de WebGL: verificar el fallback HTML (sin WebGL) y que el canvas no recorte la hoja.
 - Pantalla de carga: capturar la secuencia cuadro por cuadro en desktop y móvil (el clip debe aterrizar sobre la foto B/N del hero) y probar reduced motion (no debe aparecer).
 - Colección: elegir cada color en la tarjeta (fotos, precio y tallas) y revisar `dist/llms.txt` y los `Product` del JSON-LD.
-- Panel: abrir `/keystatic`, entrar a cada sección y guardar una vez; confirmar que la página refleja el cambio y que `src/assets/cms/` no deja fotos huérfanas.
+- Panel: en local y sin `PUBLIC_KEYSTATIC_GITHUB_REPO` (con ella, guardar publica en el sitio de la clienta), abrir `/keystatic`, entrar a cada sección y guardar una vez; confirmar que la página refleja el cambio y que `src/assets/cms/` no deja fotos huérfanas.
 - Después de un push con cambios de SEO: en el sitio publicado, el canonical apunta al dominio real y el `og:image` responde 200.
 - Cualquier cambio: `git diff --check` y revisar el diff final.
 
